@@ -76,11 +76,16 @@ Our docs are built with Next.js & Nextra. To contribute:
 
 ## Code Formatting & Linting
 
-Each project adheres to consistent code style:
+Each project adheres to consistent code style. Each time before you push
+changes, run the following commands:
 
 ### Prettier
 
-- To format your code using Prettier in any project, run:
+- Prettier will automatically format your code so our project has consistent
+  formatting and line spacing
+
+- To format your code using Prettier in the project, run the following commands
+  in the root project directory:
 
   ```
   npx prettier --write .
@@ -88,6 +93,7 @@ Each project adheres to consistent code style:
 
 ### Linting
 
+- The linter ensures that your code does not have any errors.
 - To run the linter for the mobile app or docs project, use:
 
   ```
