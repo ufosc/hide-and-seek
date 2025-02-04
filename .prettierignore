@@ -1,0 +1,5 @@
+node_modules/
+mobile/node_modules/
+mobile/.expo/
+docs/node_modules/
+docs/.next/

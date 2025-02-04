@@ -1,0 +1,13 @@
+{
+  "name": "hide-and-seek",
+  "version": "1.0.0",
+  "scripts": {
+    "format": "npx prettier . --write"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.4.2"
+  }
+}
