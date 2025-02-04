@@ -1,6 +1,6 @@
 # Hide and Seek Project
 
-Welcome to the UF Open Source Club's "Hide and Seek" Project. This document explains the project structure and guides you on how to develop and contribute.
+Welcome to the UF Open Source Club's "Hide and Seek" Project. An app that allows you to play Hide and Seek across campus in the style of [Jetlag](https://www.youtube.com/watch?v=PHjkSKQSzv4)!
 
 ## Project Structure
 
@@ -59,7 +59,7 @@ Each project adheres to consistent code style:
 3. Run the app:
   
    ```
-   npm run start
+   npm start
    ```
 
 ## Contributing to the Docs
