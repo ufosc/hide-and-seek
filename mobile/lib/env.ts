@@ -12,4 +12,4 @@ if (!parsedEnv.success) {
   console.error("Invalid environment variables:", parsedEnv.error);
 }
 
-export const env = parsedEnv.data;
+export const env = parsedEnv.data!;
