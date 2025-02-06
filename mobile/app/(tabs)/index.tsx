@@ -1,5 +1,6 @@
 import { Image, StyleSheet, Platform } from "react-native";
 
+import { env } from "@/lib/env";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
@@ -44,14 +45,9 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
+        <ThemedText type="subtitle">Step 3: Test Secret message: </ThemedText>
         <ThemedText>
-          When you're ready, run{" "}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText>{" "}
-          to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-          directory. This will move the current{" "}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
+          <ThemedText type="defaultSemiBold">{env.SECRET_MESSAGE}</ThemedText>.
         </ThemedText>
       </ThemedView>
     </ParallaxScrollView>
