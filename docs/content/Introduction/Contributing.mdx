@@ -41,7 +41,16 @@ from where it left off.
    want to work on by clicking on the dropdown on Github that says `production`
    and then clicking `View all branches`
 
-   If the branch has not had activity for **five days** or more, you can start
+   <img
+     src="/branch-dropdown.webp"
+     alt="dropdown"
+     style={{ maxHeight: "300px" }}
+   />
+
+3. If your issue has not been started yet, leave a comment saying that you want
+   to work on it so the tech leads can move the issue into `in progress`
+
+   If any branch has not had activity for **four days** or more, you can start
    working on that branch, otherwise find another issue to work on.
 
 ## 3. Create a new branch
@@ -66,18 +75,20 @@ Branches should be prefixed with their branch type. There are two main branch
 types you will create:
 
 1. Feature branches are used for developing new features. Use the prefix
-   `feature/`. For example, `feature/3-login-system`
+   `feature/`. For example, `feature/3/login-system`
 2. Bugfix branches are used to fix bugs in the code. Use the prefix `bugfix/`.
-   For example, `bugfix/5-header-styling`.
+   For example, `bugfix/5/header-styling`.
 
 In addition, to these prefixes, branch names must follow additional criteria:
 
 - **Include the issue number:** If your branch is realted to an issue, include
-  the issue number after the prefix. For example, `bugfix/12-map-crashing`
+  the issue number after the prefix. For example, `bugfix/12/map-crashing`
 - **Lowercase and hyphen-separated:** Use only lowercase letters and hypens to
   separate words.
 - **No continuous hyphens:** Do not use multiple hypens in a row.
   `feature/-new--login` can be hard to read
+- \*\*Optionally, you can include your username after the branchname, like
+  `feature/3/login-system-dyland88`
 
 ## 4. Create commits and push to the main repository
 
