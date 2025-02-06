@@ -1,11 +1,11 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, StyleSheet, Platform, Button } from "react-native";
 
 import { env } from "@/lib/env";
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import Config from "react-native-config";
+import { router } from "expo-router";
 
 export default function HomeScreen() {
   return (
@@ -53,6 +53,12 @@ export default function HomeScreen() {
           </ThemedText>
           .
         </ThemedText>
+        <Button
+          title="Go to auth"
+          onPress={() => {
+            router.replace("/(auth)/login");
+          }}
+        />
       </ThemedView>
     </ParallaxScrollView>
   );
