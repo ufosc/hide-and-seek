@@ -4,10 +4,15 @@ Welcome to the UF Open Source Club's "Hide and Seek" Project. An app that allows
 you to play Hide and Seek across campus in the style of
 [Jetlag](https://www.youtube.com/watch?v=PHjkSKQSzv4)!
 
+If you want to get started contributing, check out our
+[documentation](https://hide-and-seek-lac.vercel.app/)!
+
 ## Helpful Links
 
 🖌️
 [Figma Mockup](https://www.figma.com/design/SNNLRoLLpGsOfBPUgeeoaw/OSC-Hide-and-Seek?node-id=2-2&t=4aAjksykaIuTcMgX-1)
+
+📖 [Documentation](https://hide-and-seek-lac.vercel.app/)
 
 ## Project Structure
 
