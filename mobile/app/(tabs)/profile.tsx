@@ -1,4 +1,4 @@
-import { View, Text, Button } from "react-native";
+import { View, Text, Button, SafeAreaView } from "react-native";
 import { useAuthStore } from "@/context/AuthContext";
 
 export default function ProfileScreen() {
@@ -6,10 +6,10 @@ export default function ProfileScreen() {
   const signOut = useAuthStore((state) => state.signOut);
 
   return (
-    <View>
+    <SafeAreaView>
       <Text>Profile Screen</Text>
       {user && <Text>User ID: {user.id}</Text>}
       <Button title="Sign Out" onPress={signOut} />
-    </View>
+    </SafeAreaView>
   );
 }
