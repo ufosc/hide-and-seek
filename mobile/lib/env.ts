@@ -6,6 +6,7 @@ const envSchema = z.object({
   EXPO_PUBLIC_SECRET_MESSAGE: z.string(),
 });
 
+console.log(process.env);
 const parsedEnv = envSchema.safeParse(process.env);
 
 if (!parsedEnv.success) {

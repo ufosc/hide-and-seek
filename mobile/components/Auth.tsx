@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { supabase } from "@/lib/supabase";
 import { Button, Input } from "@rneui/themed";
-import { useRouter } from "expo-router";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   async function signInWithEmail() {
     setLoading(true);
@@ -19,22 +17,20 @@ export default function Auth() {
 
     if (error) Alert.alert(error.message);
     setLoading(false);
-
-    router.push("/(tabs)");
   }
 
   async function signUpWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
     if (error) Alert.alert(error.message);
-    else {
-      Alert.alert("Check your email for verification!");
-      router.push("/(tabs)");
-    }
+    if (!session) Alert.alert("Signed up!");
     setLoading(false);
   }
 
