@@ -9,8 +9,8 @@ import { useFonts } from "expo-font";
 import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "react-native";
-import { supabase } from "@/lib/supabase";
-import { useAuthStore } from "@/context/AuthContext";
+import { supabase } from "@lib/supabase";
+import { useAuthStore } from "@context/AuthContext";
 import { Session } from "@supabase/supabase-js";
 
 SplashScreen.preventAutoHideAsync();

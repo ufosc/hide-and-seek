@@ -11,6 +11,7 @@ const parsedEnv = envSchema.safeParse(process.env);
 
 if (!parsedEnv.success) {
   console.error("Invalid environment variables:", parsedEnv.error);
+  throw new Error("Invalid environment variables");
 }
 
-export const env = parsedEnv.data;
+export const env: z.infer<typeof envSchema> = parsedEnv.data as z.infer<typeof envSchema>;
