@@ -10,6 +10,8 @@ interface AuthState {
   isLoading: boolean;
   setUser: (session: Session | null) => void;
   signOut: () => Promise<void>;
+  signInWithEmail: (email: string, password: string) => Promise<void>;
+  signUpWithEmail: (email: string, password: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -28,6 +30,32 @@ export const useAuthStore = create<AuthState>()(
         } else {
           set({ session: null, user: null });
         }
+      },
+      signInWithEmail: async (email, password) => {
+        set({ isLoading: true });
+        const { error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password,
+        });
+
+        if (error) {
+          console.log(error.message);
+        }
+        set({ isLoading: false });
+      },
+      signUpWithEmail: async (email, password) => {
+        set({ isLoading: true });
+        const { error } = await supabase.auth.signUp({
+          email: email,
+          password: password,
+        });
+
+        if (error) {
+          console.log(error.message);
+        } else {
+          console.log("Check your email for verification!");
+        }
+        set({ isLoading: false });
       },
     }),
     {
