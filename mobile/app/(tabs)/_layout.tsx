@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { useAuthStore } from "@/context/AuthContext";
+import { useAuthStore } from "@/store/authStore";
 import { Redirect } from "expo-router";
 
 export default function TabLayout() {

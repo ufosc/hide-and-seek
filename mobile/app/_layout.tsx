@@ -10,8 +10,7 @@ import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useColorScheme } from "react-native";
 import { supabase } from "@/lib/supabase";
-import { useAuthStore } from "@/context/AuthContext";
-import { Session } from "@supabase/supabase-js";
+import { useAuthStore } from "@/store/authStore";
 
 SplashScreen.preventAutoHideAsync();
 

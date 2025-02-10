@@ -1,42 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, StyleSheet, View } from "react-native";
 import { supabase } from "@/lib/supabase";
 import { Button, Input } from "@rneui/themed";
-import { useRouter } from "expo-router";
+import { router, useRouter } from "expo-router";
+import { useAuthStore } from "@/store/authStore";
 
 export default function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
+  const signInWithEmail = useAuthStore((state) => state.signInWithEmail);
+  const signUpWithEmail = useAuthStore((state) => state.signUpWithEmail);
+  const loading = useAuthStore((state) => state.isLoading);
+  const session = useAuthStore((state) => state.session);
 
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    setLoading(false);
-
-    router.push("/(tabs)");
-  }
-
-  async function signUpWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    });
-
-    if (error) Alert.alert(error.message);
-    else {
-      Alert.alert("Check your email for verification!");
-      router.push("/(tabs)");
+  useEffect(() => {
+    if (session) {
+      router.replace("/(tabs)");
     }
-    setLoading(false);
-  }
+  }, [session]);
 
   return (
     <View style={styles.container}>
@@ -65,14 +46,14 @@ export default function Auth() {
         <Button
           title="Sign in"
           disabled={loading}
-          onPress={() => signInWithEmail()}
+          onPress={() => signInWithEmail(email, password)}
         />
       </View>
       <View style={styles.verticallySpaced}>
         <Button
           title="Sign up"
           disabled={loading}
-          onPress={() => signUpWithEmail()}
+          onPress={() => signUpWithEmail(email, password)}
         />
       </View>
     </View>
