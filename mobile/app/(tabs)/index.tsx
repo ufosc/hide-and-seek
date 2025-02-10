@@ -1,84 +1,147 @@
-import { Image, StyleSheet, Platform, Button } from "react-native";
+import React, { useEffect } from "react";
+import { View, StyleSheet, Button } from "react-native";
+import MapComponent from "@/components/MapComponent";
+import useMapStore from "@/store/mapStore";
+import { MapMarker, MapPolygon, MapCircle, MapRegion } from "@/types/mapTypes";
 
-import { env } from "@/lib/env";
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { router } from "expo-router";
-
-export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit{" "}
-          <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-          to see changes. Press{" "}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: "cmd + d",
-              android: "cmd + m",
-              web: "F12",
-            })}
-          </ThemedText>{" "}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-        <ThemedText>
-          Tap the Explore tab to learn more about what's included in this
-          starter app.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Test Secret message: </ThemedText>
-        <ThemedText>
-          <ThemedText type="defaultSemiBold">
-            {env.EXPO_PUBLIC_SECRET_MESSAGE}
-          </ThemedText>
-          .
-        </ThemedText>
-        <Button
-          title="Go to auth"
-          onPress={() => {
-            router.replace("/(auth)/login");
-          }}
-        />
-      </ThemedView>
-    </ParallaxScrollView>
+const GameMapScreen: React.FC = () => {
+  // Type GameMapScreen as a functional component
+  const setMarkers = useMapStore((state) => state.setMarkers);
+  const setPolygons = useMapStore((state) => state.setPolygons);
+  const setCircles = useMapStore((state) => state.setCircles);
+  const setRegion = useMapStore((state) => state.setRegion);
+  const addMarker = useMapStore((state) => state.addMarker);
+  const isDrawingPolygon = useMapStore((state) => state.isDrawingPolygon);
+  const startDrawingPolygon = useMapStore((state) => state.startDrawingPolygon);
+  const stopDrawingPolygon = useMapStore((state) => state.stopDrawingPolygon);
+  const addCoordinateToPolygonDraft = useMapStore(
+    (state) => state.addCoordinateToPolygonDraft,
   );
-}
+
+  const removeLastCoordinateFromPolygonDraft = useMapStore(
+    (state) => state.removeLastCoordinateFromPolygonDraft,
+  );
+  const clearPolygonDraft = useMapStore((state) => state.clearPolygonDraft);
+  const setFinalPolygon = useMapStore((state) => state.setFinalPolygon);
+  const polygonDraftCoordinates = useMapStore(
+    (state) => state.polygonDraftCoordinates,
+  );
+
+  useEffect(() => {
+    // Filled with hard coded defaults for now
+    const initialMarkers: MapMarker[] = [
+      // Type the array of markers
+      {
+        coordinate: { latitude: 29.643946, longitude: -82.355659 },
+        title: "Marker 1",
+        description: "This is UF Campus",
+      },
+    ];
+    setMarkers(initialMarkers);
+
+    const initialPolygons: MapPolygon[] = [
+      // Type the array of polygons
+      { coordinates: [], fillColor: "rgba(100,200,200,0.3)" }, // Replace with actual coordinates
+    ];
+    setPolygons(initialPolygons);
+
+    const initialCircles: MapCircle[] = [
+      // Type the array of circles
+      {
+        center: { latitude: 37.78825, longitude: -122.4324 },
+        radius: 500,
+        fillColor: "rgba(200,100,100,0.3)",
+      },
+    ];
+    setCircles(initialCircles);
+
+    const initialRegion: MapRegion = {
+      // Type the region object
+      latitude: 29.643946,
+      longitude: -82.355659,
+      latitudeDelta: 0.05,
+      longitudeDelta: 0.05,
+    };
+    setRegion(initialRegion);
+  }, [setMarkers, setPolygons, setCircles, setRegion]);
+
+  const handleAddMarker = () => {
+    const newMarker: MapMarker = {
+      // Add a random new coordinate around UF (example purposes only)
+      coordinate: {
+        latitude: 29.643946 + (0.0125 - Math.random() * 0.025),
+        longitude: -82.355659 + (0.0125 - Math.random() * 0.025),
+      },
+      title: "Dynamic Marker",
+      description: "Added dynamically!",
+    };
+    addMarker(newMarker);
+  };
+
+  const handleMapPress = (event: any) => {
+    if (isDrawingPolygon) {
+      const coordinate = event.nativeEvent.coordinate;
+      addCoordinateToPolygonDraft(coordinate);
+    }
+  };
+
+  const handleStartDrawing = () => {
+    startDrawingPolygon();
+  };
+
+  const handleStopDrawing = () => {
+    stopDrawingPolygon();
+    // Optionally finalize the polygon and store it in 'polygons' state
+    if (polygonDraftCoordinates.length >= 3) {
+      const newPolygon: MapPolygon = {
+        coordinates: polygonDraftCoordinates,
+        fillColor: "rgba(0, 255, 0, 0.3)",
+        strokeColor: "green",
+        strokeWidth: 3,
+      }; // Example final polygon style
+      setFinalPolygon([newPolygon]); // Or use addPolygon if you want to keep existing polygons
+    }
+  };
+
+  const handleClearDraft = () => {
+    clearPolygonDraft();
+  };
+
+  const handleRemoveLastPoint = () => {
+    removeLastCoordinateFromPolygonDraft();
+  };
+
+  return (
+    <View style={styles.container}>
+      <MapComponent onPress={handleMapPress} />
+      {/* Pass handleMapPress to MapComponent */}
+      <View style={styles.buttonContainer}>
+        <Button
+          title={isDrawingPolygon ? "Stop Drawing" : "Start Drawing Polygon"}
+          onPress={isDrawingPolygon ? handleStopDrawing : handleStartDrawing}
+        />
+        {isDrawingPolygon && (
+          <>
+            <Button title="Clear Draft" onPress={handleClearDraft} />
+            <Button title="Remove Last Point" onPress={handleRemoveLastPoint} />
+          </>
+        )}
+      </View>
+      <Button title="Add Marker" onPress={handleAddMarker} />
+      {/* Keep the add marker button for testing */}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  titleContainer: {
+  container: {
+    flex: 1,
+  },
+  buttonContainer: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+    justifyContent: "space-around",
+    paddingVertical: 20,
   },
 });
+
+export default GameMapScreen;
