@@ -113,7 +113,7 @@ const GameMapScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <MapComponent onPress={handleMapPress} />{" "}
+      <MapComponent onPress={handleMapPress} />
       {/* Pass handleMapPress to MapComponent */}
       <View style={styles.buttonContainer}>
         <Button
@@ -127,7 +127,7 @@ const GameMapScreen: React.FC = () => {
           </>
         )}
       </View>
-      <Button title="Add Marker" onPress={handleAddMarker} />{" "}
+      <Button title="Add Marker" onPress={handleAddMarker} />
       {/* Keep the add marker button for testing */}
     </View>
   );
