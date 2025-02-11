@@ -6,25 +6,25 @@ import { MapMarker, MapPolygon, MapCircle, MapRegion } from "@/types/mapTypes";
 
 const GameMapScreen: React.FC = () => {
   // Type GameMapScreen as a functional component
-  const setMarkers = useMapStore((state) => state.setMarkers);
-  const setPolygons = useMapStore((state) => state.setPolygons);
-  const setCircles = useMapStore((state) => state.setCircles);
-  const setRegion = useMapStore((state) => state.setRegion);
-  const addMarker = useMapStore((state) => state.addMarker);
-  const isDrawingPolygon = useMapStore((state) => state.isDrawingPolygon);
-  const startDrawingPolygon = useMapStore((state) => state.startDrawingPolygon);
-  const stopDrawingPolygon = useMapStore((state) => state.stopDrawingPolygon);
+  const setMarkers = useMapStore((state: any) => state.setMarkers);
+  const setPolygons = useMapStore((state: any) => state.setPolygons);
+  const setCircles = useMapStore((state: any) => state.setCircles);
+  const setRegion = useMapStore((state: any) => state.setRegion);
+  const addMarker = useMapStore((state: any) => state.addMarker);
+  const isDrawingPolygon = useMapStore((state: any) => state.isDrawingPolygon);
+  const startDrawingPolygon = useMapStore((state: any) => state.startDrawingPolygon);
+  const stopDrawingPolygon = useMapStore((state: any) => state.stopDrawingPolygon);
   const addCoordinateToPolygonDraft = useMapStore(
-    (state) => state.addCoordinateToPolygonDraft,
+    (state: any) => state.addCoordinateToPolygonDraft,
   );
 
   const removeLastCoordinateFromPolygonDraft = useMapStore(
-    (state) => state.removeLastCoordinateFromPolygonDraft,
+    (state: any) => state.removeLastCoordinateFromPolygonDraft,
   );
-  const clearPolygonDraft = useMapStore((state) => state.clearPolygonDraft);
-  const setFinalPolygon = useMapStore((state) => state.setFinalPolygon);
+  const clearPolygonDraft = useMapStore((state: any) => state.clearPolygonDraft);
+  const setFinalPolygon = useMapStore((state: any) => state.setFinalPolygon);
   const polygonDraftCoordinates = useMapStore(
-    (state) => state.polygonDraftCoordinates,
+    (state: any) => state.polygonDraftCoordinates,
   );
 
   useEffect(() => {
