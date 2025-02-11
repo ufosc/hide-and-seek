@@ -1,11 +1,21 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { Input } from "@rneui/themed";
+import { ChatInput } from "@/components/chat/ChatInput";
 
 export default function ChatScreen() {
+  const [input, setInput] = React.useState("");
+
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <Text style={styles.text}>Chat Screen</Text>
-    </View>
+      <ChatInput
+        value={input}
+        onChangeText={(text: string) => {
+          setInput(text);
+        }}
+      />
+    </KeyboardAvoidingView>
   );
 }
 
