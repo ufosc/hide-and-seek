@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
-import { supabase } from "@lib/supabase"; 
-import Auth from '@components/Auth';
-import Account from '@components/Account';
+import { supabase } from "@/lib/supabase"; 
+import Auth from '@/components/Auth';
+import Account from '@/components/Account';
 import { Session } from '@supabase/supabase-js';
 import { generateStaticParamsFor, importPage } from "nextra/pages";
 

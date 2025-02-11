@@ -1,7 +1,7 @@
 import { Stack } from "expo-router";
 import React from "react";
 
-// import { useColorScheme } from "@hooks/useColorScheme";
+// import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function AuthLayout() {
   return (

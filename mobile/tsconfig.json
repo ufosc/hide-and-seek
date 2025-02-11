@@ -5,13 +5,6 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
-      "@components/*": ["components/*"],
-      "@lib/*": ["./lib/*"],
-      "@context/*": ["context/*"],
-      "@hooks/*": ["hooks/*"],
-      "@screens/*": ["screens/*"],
-      "@constants/*": ["constants/*"],
-      "@assets/*": ["assets/*"],
     }
   },
   "include": [
