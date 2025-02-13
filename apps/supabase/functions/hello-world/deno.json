@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "@shared-types/mapTypes": "../../../../packages/types/src/index.ts"
+  }
+}
