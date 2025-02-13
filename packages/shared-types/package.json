@@ -1,17 +1,14 @@
 {
   "name": "@repo/shared-types",
+  "exports": {
+    "mapTypes": "./src/mapTypes"
+  },
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
-    "clean": "rm -rf dist"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "tsup": "^8.3.6",
     "typescript": "^5.7.3"

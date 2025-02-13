@@ -2,7 +2,12 @@ import React, { useEffect } from "react";
 import { View, StyleSheet, Button } from "react-native";
 import MapComponent from "@/components/MapComponent";
 import useMapStore from "@/store/mapStore";
-import { MapMarker, MapPolygon, MapCircle, MapRegion } from "@/types/mapTypes";
+import {
+  MapMarker,
+  MapPolygon,
+  MapCircle,
+  MapRegion,
+} from "@repo/shared-types/mapTypes";
 
 const GameMapScreen: React.FC = () => {
   // Type GameMapScreen as a functional component

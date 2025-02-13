@@ -1,7 +1,12 @@
 import React from "react";
 import MapView, { Marker, Polygon, Circle } from "react-native-maps";
 import useMapStore from "../store/mapStore";
-import { MapMarker, MapPolygon, MapCircle, MapRegion } from "@/types/mapTypes";
+import {
+  MapMarker,
+  MapPolygon,
+  MapCircle,
+  MapRegion,
+} from "@repo/shared-types/mapTypes";
 
 import { LatLng } from "react-native-maps";
 
@@ -18,7 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
   const onMapReadyHandler = useMapStore((state) => state.onMapReadyHandler);
   const isDrawingPolygon = useMapStore((state) => state.isDrawingPolygon);
   const polygonDraftCoordinates = useMapStore(
-    (state) => state.polygonDraftCoordinates,
+    (state) => state.polygonDraftCoordinates
   );
 
   return (

@@ -1,5 +1,6 @@
 {
   "imports": {
-    "@shared-types/mapTypes": "../../../../packages/types/src/index.ts"
+    "@shared-types/mapTypes": "../../../../packages/shared-types/src/mapTypes.ts",
+    "react-native-maps": "npm:react-native-maps"
   }
 }
