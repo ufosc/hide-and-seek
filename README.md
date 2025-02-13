@@ -36,17 +36,23 @@ This repo contains three main folders: _docs_, _mobile_, and _supabase_
 
 ## Running the mobile app, server, and docs
 
+1. Install the package manager, yarn (must be version 1)
+
+```
+npm install -g yarn@1
+```
+
 1. Install dependencies
 
-   ```
-   yarn install
-   ```
+```
+yarn install
+```
 
 2. Start the program
 
-   ```
-   yarn run dev
-   ```
+```
+yarn run dev
+```
 
 ## Adding to the documentation
 
