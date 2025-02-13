@@ -1,31 +1,82 @@
-# Turborepo react-native starter
+# Hide and Seek Project
 
-This is a community-maintained example. If you experience a problem, please submit a pull request with a fix. GitHub Issues will be closed.
+Welcome to the UF Open Source Club's "Hide and Seek" Project. An app that allows
+you to play Hide and Seek across campus in the style of
+[Jetlag](https://www.youtube.com/watch?v=PHjkSKQSzv4)!
 
-## Using this example
+If you want to get started contributing, check out our
+[documentation](https://hide-and-seek-lac.vercel.app/)!
 
-Run the following command:
+## Helpful Links
 
-```sh
-npx create-turbo@latest -e with-react-native-web
+🖌️
+[Figma Mockup](https://www.figma.com/design/SNNLRoLLpGsOfBPUgeeoaw/OSC-Hide-and-Seek?node-id=2-2&t=4aAjksykaIuTcMgX-1)
+
+📖 [Documentation](https://hide-and-seek-lac.vercel.app/)
+
+## Project Structure
+
+This repo contains three main folders: _docs_, _mobile_, and _supabase_
+
+```
+|-- docs/             # Next.js docs project using Nextra for documentation
+|   |-- pages/        # Documentation pages
+|
+|-- mobile/           # Mobile app project (React Native)
+|   |-- components/   # UI components (e.g., HelloWave.tsx)
+|   |-- ...other code...
+|
+|-- supabase/         # Supabase backend functions and configuration
+|   |-- functions/    # Database triggers and API functions
+|   |-- ...other code...
+|
+|-- package.json      # Root project configuration for prettier only (as of right now)
+|-- ...other files...
 ```
 
-## What's inside?
+## Running the mobile app, server, and docs
 
-This Turborepo includes the following packages/apps:
+1. Install dependencies
 
-### Apps and Packages
+   ```
+   yarn install
+   ```
 
-- `native`: a [react-native](https://reactnative.dev/) app built with [expo](https://docs.expo.dev/)
-- `web`: a [Next.js](https://nextjs.org/) app built with [react-native-web](https://necolas.github.io/react-native-web/)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+2. Start the program
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+   ```
+   yarn run dev
+   ```
 
-### Utilities
+## Adding to the documentation
 
-This Turborepo has some additional tools already setup for you:
+Edit Markdown files in the `pages/` directory. Your changes will be
+live-reloaded by Nextra.
 
-- [Expo](https://docs.expo.dev/) for native development
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [Prettier](https://prettier.io) for code formatting
+## Code Formatting & Linting
+
+Each project adheres to consistent code style. Each time before you push
+changes, run the following commands:
+
+### Prettier
+
+- Prettier will automatically format your code so our project has consistent
+  formatting and line spacing
+
+- To format your code using Prettier in the project, run the following commands
+  in the root project directory:
+
+  ```
+  npx prettier --write .
+  ```
+
+### Linting
+
+- The linter ensures that your code does not have any errors.
+- To run the linter for the mobile app or docs project, use:
+
+  ```
+  yarn run lint
+  ```
+
+Happy coding and thanks for contributing!
