@@ -88,9 +88,12 @@ export default function Auth() {
         </View>
       </View>
 
-      <Text style={styles.signUpText}>
-        Don’t have an account? <Text style={styles.signUpLink}>Sign up</Text>
-      </Text>
+      <View style={styles.signUpContainer}>
+        <Text style={styles.signUpText}>Don't have an account?</Text>
+        <TouchableOpacity onPress={() => router.replace("/(auth)/signup")}>
+          <Text style={styles.signUpLink}>Sign up</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -181,12 +184,17 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: "#A3A3A3",
-    marginTop: 20,
     textAlign: "center",
   },
   signUpLink: {
     color: "white",
     fontWeight: "bold",
     cursor: "pointer",
+  },
+  signUpContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 12,
+    margin: 10,
   },
 });
