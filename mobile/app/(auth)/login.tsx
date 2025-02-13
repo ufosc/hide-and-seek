@@ -12,7 +12,7 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function Auth() {
+export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -25,10 +25,12 @@ export default function Auth() {
       password: password,
     });
 
-    if (error) Alert.alert(error.message);
     setLoading(false);
-
-    router.push("/(tabs)");
+    if (error) {
+      Alert.alert(error.message);
+    } else {
+      router.replace("/(tabs)");
+    }
   }
 
   return (
@@ -62,7 +64,7 @@ export default function Auth() {
             onPress={signInWithEmail}
             disabled={loading}
           >
-            <Text style={styles.loginText}>Log in</Text>
+            <Text style={styles.loginText}>Login</Text>
           </TouchableOpacity>
         </View>
 
