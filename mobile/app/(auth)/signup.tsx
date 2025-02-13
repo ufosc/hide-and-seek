@@ -12,15 +12,15 @@ import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 
-export default function LoginPage() {
+export default function SignUpScreen() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  async function signInWithEmail() {
+  async function signUpWithEmail() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
@@ -36,7 +36,7 @@ export default function LoginPage() {
   return (
     <View style={styles.container}>
       <View style={styles.containerForm}>
-        <Text style={styles.title}>Welcome Back!</Text>
+        <Text style={styles.title}>Create an Account</Text>
 
         <View style={styles.form}>
           <View>
@@ -57,14 +57,13 @@ export default function LoginPage() {
               value={password}
             />
           </View>
-          <Text style={styles.forgotPassword}>Forgot your password?</Text>
 
           <TouchableOpacity
             style={styles.loginButton}
-            onPress={signInWithEmail}
+            onPress={signUpWithEmail}
             disabled={loading}
           >
-            <Text style={styles.loginText}>Login</Text>
+            <Text style={styles.loginText}>Sign Up</Text>
           </TouchableOpacity>
         </View>
 
@@ -91,9 +90,9 @@ export default function LoginPage() {
       </View>
 
       <View style={styles.signUpContainer}>
-        <Text style={styles.signUpText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={() => router.replace("/(auth)/signup")}>
-          <Text style={styles.signUpLink}>Sign up</Text>
+        <Text style={styles.signUpText}>Already have an account?</Text>
+        <TouchableOpacity onPress={() => router.replace("/(auth)/login")}>
+          <Text style={styles.signUpLink}>Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
