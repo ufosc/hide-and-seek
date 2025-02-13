@@ -17,7 +17,6 @@
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
-    "@repo/ui": "*",
     "@rneui/base": "4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.8",
     "@supabase/supabase-js": "^2.48.1",

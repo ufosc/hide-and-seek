@@ -1,0 +1,11 @@
+{
+  "name": "supabase",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx supabase start && npx supabase functions serve"
+  },
+  "dependencies": {
+    "supabase": "^2.12.1"
+  }
+}
