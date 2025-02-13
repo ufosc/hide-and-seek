@@ -3,7 +3,7 @@
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
-    "dev": "expo start",
+    "dev": "expo start --tunnel",
     "reset-project": "node ./scripts/reset-project.js",
     "android": "expo start --android",
     "ios": "expo start --ios",
@@ -47,7 +47,9 @@
     "react-native-webview": "13.12.5",
     "tailwindcss": "^3.4.17",
     "zod": "^3.24.1",
-    "zustand": "^5.0.3"
+    "zustand": "^5.0.3",
+    "react-native-maps": "1.18.0",
+    "expo-location": "~18.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

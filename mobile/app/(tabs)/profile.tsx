@@ -1,5 +1,5 @@
 import { View, Text, Button, SafeAreaView } from "react-native";
-import { useAuthStore } from "@/context/AuthContext";
+import { useAuthStore } from "@/store/authStore";
 
 export default function ProfileScreen() {
   const user = useAuthStore((state) => state.user);

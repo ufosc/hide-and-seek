@@ -51,7 +51,7 @@ This repo contains three main folders: _docs_, _mobile_, and _supabase_
 3. Run the app:
 
    ```
-   npm start
+   npm run dev
    ```
 
 ## Running and Contributing to the Docs
