@@ -6,6 +6,8 @@
     "dev": "npx supabase start && npx supabase functions serve"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.48.1",
+    "npm": "^11.1.0",
     "supabase": "^2.12.1"
   }
 }
