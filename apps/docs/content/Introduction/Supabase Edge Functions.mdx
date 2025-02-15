@@ -1,0 +1,71 @@
+---
+title: Supabase Edge Functions
+description: Developing with Supabase Edge Functions, using the create-game-api as an example.
+---
+
+This document outlines best practices and troubleshooting tips for developing Supabase Edge Functions within this project, using the `create-game-api` function as a primary example.
+
+## Core Concepts
+
+Supabase Edge Functions allow you to deploy server-side logic directly to Supabase's globally distributed network. This offers low latency and scalability for your application's backend processes.
+
+### Key Components
+
+- **`@repo/schema` Package:** This package defines the data structures (schemas) used by both the Edge Functions and the client applications. It ensures type safety and consistency across your project.
+- **`deno.json`:** This file manages dependencies and import maps for your Deno environment within the Edge Function.
+
+## Best Practices
+
+When developing Supabase Edge Functions, follow these guidelines:
+
+### 1. Data Validation and Type Safety
+
+- **Input Validation:** Mirroring the `create-game-api` example, create Zod schemas for both input validation and the expected return type of your API calls. This ensures that you're handling data correctly and providing consistent responses.
+- **Drizzle ORM:** Define your Drizzle table schemas to closely match your Zod schemas. This promotes consistency between your data models and database structure. Refer to the [Drizzle ORM documentation](https://orm.drizzle.team/) for detailed information on defining table schemas.
+
+### 2. Dependency Management
+
+- **`@repo/schema` Imports:** Import your data schemas from the `@repo/schema` package to maintain consistency across your application.
+- **`deno.json` Configuration:** Specify all necessary packages and their versions in the `deno.json` file. This ensures that your Edge Function has access to the required dependencies.
+
+## Testing
+
+### 1. cURL
+
+You can test your Edge Functions using `curl` commands. This is a simple way to send HTTP requests and inspect the responses.
+
+Example:
+
+```
+curl -X POST https://your-supabase-url/functions/v1/your-function-name -H "Authorization: Bearer your-supabase-key" -H "Content-Type: application/json" -d '{"key": "value"}'
+```
+
+For example, when testing `create-game-api`, run:
+
+curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api' \
+ --header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart'
+--header 'Content-Type: application/json' \
+ --data '{"title": "My New Game"}'
+
+### 2. Postman
+
+For more advanced testing, you can use Postman to create and manage HTTP requests. This tool provides a user-friendly interface for testing your Edge Functions and inspecting responses.
+
+## Troubleshooting
+
+### 1. Environment Variables
+
+Ensure that your environment variables are correctly loaded. You can verify this by logging the value of a variable, such as `DATABASE_URL`:
+
+```javascript
+console.log(Deno.env.get("DATABASE_URL"));
+```
+
+### 2. Restarting Supabase
+
+If your environment variables are not loaded correctly, you may need to restart Supabase manually. To do this, navigate to the `./apps/supabase/` directory and run the following commands:
+
+```bash
+yarn supabase stop
+yarn supabase start
+```

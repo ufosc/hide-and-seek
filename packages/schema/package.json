@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "exports": {
+    "game": "./src/game"
+  },
   "dependencies": {
     "@types/node": "^22.13.4",
     "drizzle-kit": "^0.30.4",
