@@ -43,9 +43,9 @@ curl -X POST https://your-supabase-url/functions/v1/your-function-name -H "Autho
 For example, when testing `create-game-api`, run:
 
 ```bash
-curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api'
---header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart'
---header 'Content-Type: application/json'
+curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api' \
+--header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart' \
+--header 'Content-Type: application/json' \
 --data '{"title": "My New Game"}'
 ```
 
