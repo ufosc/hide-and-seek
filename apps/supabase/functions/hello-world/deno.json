@@ -1,6 +1,8 @@
 {
   "imports": {
     "@shared-types/mapTypes": "../../../../packages/shared-types/src/mapTypes.ts",
-    "react-native-maps": "npm:react-native-maps"
+    "react-native-maps": "npm:react-native-maps",
+    "drizzle-orm/": "npm:/drizzle-orm/",
+    "postgres": "npm:postgres"
   }
 }

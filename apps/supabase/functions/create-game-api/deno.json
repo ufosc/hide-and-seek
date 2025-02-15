@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "@repo/schema": "../../../../packages/schema/src/game.ts",
+    "zod": "npm:zod",
+    "drizzle-orm/": "npm:/drizzle-orm/",
+    "postgres": "npm:postgres"
+  }
+}

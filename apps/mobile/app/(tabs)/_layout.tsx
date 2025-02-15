@@ -5,6 +5,8 @@ import { Redirect } from "expo-router";
 export default function TabLayout() {
   const session = useAuthStore((state) => state.session);
 
+  console.log(session);
+
   if (!session) {
     return <Redirect href="/login" />;
   }
