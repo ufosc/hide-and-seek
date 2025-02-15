@@ -69,3 +69,33 @@ If your environment variables are not loaded correctly, you may need to restart 
 yarn supabase stop
 yarn supabase start
 ```
+
+--- Brief outline for how to make edge functions work WITHOUT deploying
+
+You're going to first need ngrok cli: https://dashboard.ngrok.com/get-started/setup/windows
+
+Run through the setup according to the docs in the link above.
+
+1. run the cli first and port forward 54321:
+
+```
+ngrok http 54321
+```
+
+Don't close this! open a new terminal!
+
+copy the link 'forwarding' link, set EXPO_PUBLIC_SUPABASE_API_URL to this link,
+append /functions/v1/:
+
+i.e:
+
+```
+EXPO_PUBLIC_SUPABASE_API_URL=https://79c0-66-231-133-9.ngrok-free.app/functions/v1/
+
+```
+
+and that's it! Your react native app should be able to connect to your functions locally!
+
+Note: While the edge functions are local, the database it queries and writes to is not!
+
+When debugging, check the supabase table editor to see if you get expected behaviors
