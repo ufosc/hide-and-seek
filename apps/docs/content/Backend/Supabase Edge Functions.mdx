@@ -36,16 +36,18 @@ You can test your Edge Functions using `curl` commands. This is a simple way to 
 
 Example:
 
-```
+```bash
 curl -X POST https://your-supabase-url/functions/v1/your-function-name -H "Authorization: Bearer your-supabase-key" -H "Content-Type: application/json" -d '{"key": "value"}'
 ```
 
 For example, when testing `create-game-api`, run:
 
-curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api' \
- --header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart'
---header 'Content-Type: application/json' \
- --data '\{"title": "My New Game"}'
+```bash
+curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api'
+--header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart'
+--header 'Content-Type: application/json'
+--data '{"title": "My New Game"}'
+```
 
 ### 2. Postman
 
@@ -70,7 +72,7 @@ yarn supabase stop
 yarn supabase start
 ```
 
---- Brief outline for how to make edge functions work WITHOUT deploying
+### Brief outline for how to make edge functions work WITHOUT deploying
 
 You're going to first need ngrok cli: https://dashboard.ngrok.com/get-started/setup/windows
 
@@ -78,14 +80,14 @@ Run through the setup according to the docs in the link above.
 
 1. run the cli first and port forward 54321:
 
-```
+```bash
 ngrok http 54321
 ```
 
 Don't close this! open a new terminal!
 
-copy the link 'forwarding' link, set EXPO_PUBLIC_SUPABASE_API_URL to this link,
-append /functions/v1/:
+copy the link 'forwarding' link, set `EXPO_PUBLIC_SUPABASE_API_URL` to this link,
+append `/functions/v1/`
 
 i.e:
 
