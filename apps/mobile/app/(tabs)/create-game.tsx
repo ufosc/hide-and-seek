@@ -9,6 +9,7 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native";
+import { CreateGameInput, CreateGameSchema } from "@repo/schema/src/game";
 
 const CreateGameForm = () => {
   const [title, setTitle] = useState("");
@@ -25,9 +26,10 @@ const CreateGameForm = () => {
             Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_ANON_KEY}`,
             // Add any necessary authorization headers here
           },
-          body: JSON.stringify({ title, description }),
+          body: JSON.stringify({ title, description } as CreateGameInput),
         }
       );
+      console.log({ title, description });
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -47,7 +49,7 @@ const CreateGameForm = () => {
       setDescription("");
     } catch (error) {
       Alert.alert("Error", error.message);
-      console.log(error);
+      console.log(error.message);
     }
   };
 
