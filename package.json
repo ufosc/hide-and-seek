@@ -5,6 +5,9 @@
     "packages/*"
   ],
   "scripts": {
+    "dev:docs": "turbo run dev --filter=docs",
+    "dev:mobile": "turbo run dev --filter=mobile",
+    "dev:supabase": "turbo run dev --filter=supabase",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "clean": "turbo run clean && rm -rf node_modules",
