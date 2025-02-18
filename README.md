@@ -54,6 +54,23 @@ yarn install
 yarn run dev
 ```
 
+You can also run each package separately with the following commands:
+
+- To run the docs project:
+  ```
+  yarn run dev:docs
+  ```
+
+- To run the mobile app:
+  ```
+  yarn run dev:mobile
+  ```
+
+- To run the supabase server:
+  ```
+  yarn run dev:supabase
+  ```
+
 ## Adding to the documentation
 
 Edit Markdown files in the `pages/` directory. Your changes will be
