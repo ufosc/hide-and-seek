@@ -8,6 +8,6 @@ export default defineConfig({
   out: "./drizzle", // Migrations will be generated in packages/schema/drizzle
   dialect: "postgresql",
   dbCredentials: {
-    url: process.env.SUPABASE_DB_URL!,
+    url: process.env.DATABASE_URL!,
   },
 } satisfies Config);
