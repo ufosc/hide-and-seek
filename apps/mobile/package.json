@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "dev": "expo start --clear",
+    "dev": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -21,6 +21,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "@supabase/supabase-js": "^2.48.1",
     "@repo/shared-types": "*",
+    "@repo/schema": "*",
     "expo": "^52.0.33",
     "expo-blur": "^14.0.3",
     "expo-constants": "~17.0.5",

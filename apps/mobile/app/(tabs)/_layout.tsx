@@ -5,6 +5,8 @@ import { Redirect } from "expo-router";
 export default function TabLayout() {
   const session = useAuthStore((state) => state.session);
 
+  console.log(session);
+
   if (!session) {
     return <Redirect href="/login" />;
   }
@@ -15,6 +17,13 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Home",
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="create-game"
+        options={{
+          title: "Create",
           headerShown: false,
         }}
       />

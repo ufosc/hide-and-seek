@@ -1,0 +1,37 @@
+---
+title: Environment Variables
+description: Setting up environment variables for your mobile app and Supabase functions.
+---
+
+To properly configure your application, you need to set up environment variables in two key locations:
+
+- `apps/mobile/.env`: Connects mobile app to all the required backend.
+- `apps/supabase/functions/.env`: Connects Edge Functions to the Database.
+- `packages/schema/.env`: Needed to update the Database schema. (More in Database and Schema). This file should look exactly like the functions/.env
+
+## Obtaining Environment Variables
+
+Both files require information from your Supabase project. Here's how to get them:
+
+1.  **Supabase Project:** Go to your Supabase project dashboard at [https://supabase.com/dashboard](https://supabase.com/dashboard).
+
+2.  **API URL and Anon Key (for `apps/mobile/.env`):**
+
+    - In your Supabase dashboard, navigate to **Project Settings** -> **API**.
+    - Find your **Project URL** (this is your `EXPO_PUBLIC_SUPABASE_URL`).
+    - Find your **anon** key (this is your `EXPO_PUBLIC_SUPABASE_ANON_KEY`).
+
+3.  **Database URL (for `apps/supabase/functions/.env`):**
+
+    - In your Supabase dashboard, navigate to **Project Settings** -> **Database**.
+    - Under **Connection info** -> **Connection string**, find the **Transaction pooler** connection string. **Important:** You must replace `[YOUR_DB_PASSWORD]` in this string with your actual database password.
+    - If you've lost your database password, you can reset it on the same page under **Reset password**.
+
+4.  **Database URL (for `packages/schema/.env`):**
+    - Exactly as (3)
+
+## Setting Up the `.env` Files
+
+1.  **Copy the example:** In each directory (`apps/mobile` and `apps/supabase/functions`), copy the `.env.example` file and rename the copy to `.env`. Do **not** commit the `.env` files to your repository.
+
+2.  **Edit the `.env` files:** Open the `.env` files and replace the placeholder values with your actual values from Supabase. Refer to the "Obtaining Environment Variables" section above for instructions on where to find these values.
