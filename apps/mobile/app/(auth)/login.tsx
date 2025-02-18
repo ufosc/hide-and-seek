@@ -11,25 +11,22 @@ import {
 import { supabase } from "@/lib/supabase";
 import { useRouter } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
+import { useAuthStore } from "@/store/authStore";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { signInWithEmail, isLoading } = useAuthStore();
 
-  async function signInWithEmail() {
-    setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-
-    setLoading(false);
-    if (error) {
-      Alert.alert(error.message);
-    } else {
-      router.replace("/(tabs)");
+  async function handleSignIn() {
+    try {
+      await signInWithEmail(email, password);
+      if (!isLoading) {
+        router.replace("/(tabs)");
+      }
+    } catch (error: any) {
+      Alert.alert("Sign-in Error", error.message);
     }
   }
 
@@ -59,11 +56,7 @@ export default function LoginPage() {
           </View>
           <Text style={styles.forgotPassword}>Forgot your password?</Text>
 
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={signInWithEmail}
-            disabled={loading}
-          >
+          <TouchableOpacity style={styles.loginButton} onPress={handleSignIn}>
             <Text style={styles.loginText}>Login</Text>
           </TouchableOpacity>
         </View>
@@ -75,7 +68,7 @@ export default function LoginPage() {
         </View>
 
         <View style={styles.socialButtonContainer}>
-          <TouchableOpacity style={styles.socialButton} disabled={loading}>
+          <TouchableOpacity style={styles.socialButton} disabled={isLoading}>
             <Image
               source={require("@/assets/images/google-icon.png")}
               style={{ width: 24, height: 24 }}
@@ -83,7 +76,7 @@ export default function LoginPage() {
             <Text style={styles.socialText}>Continue with Google</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.socialButton} disabled={loading}>
+          <TouchableOpacity style={styles.socialButton} disabled={isLoading}>
             <AntDesign name="apple1" size={24} color="white" />
             <Text style={styles.socialText}>Continue with Apple</Text>
           </TouchableOpacity>

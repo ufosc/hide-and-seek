@@ -31,7 +31,7 @@ export const useAuthStore = create<AuthState>()(
           set({ session: null, user: null });
         }
       },
-      signInWithEmail: async (email, password) => {
+      signInWithEmail: async (email: string, password: string) => {
         set({ isLoading: true });
         const { error } = await supabase.auth.signInWithPassword({
           email: email,
@@ -39,11 +39,11 @@ export const useAuthStore = create<AuthState>()(
         });
 
         if (error) {
-          console.log(error.message);
+          throw error;
         }
         set({ isLoading: false });
       },
-      signUpWithEmail: async (email, password) => {
+      signUpWithEmail: async (email: string, password: string) => {
         set({ isLoading: true });
         const { error } = await supabase.auth.signUp({
           email: email,
@@ -51,7 +51,7 @@ export const useAuthStore = create<AuthState>()(
         });
 
         if (error) {
-          console.log(error.message);
+          throw error;
         } else {
           console.log("Check your email for verification!");
         }
