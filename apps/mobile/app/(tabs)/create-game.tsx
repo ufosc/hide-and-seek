@@ -18,7 +18,7 @@ const CreateGameForm = () => {
   const handleSubmit = async () => {
     try {
       const response = await fetch(
-        `${env.EXPO_PUBLIC_SUPABASE_API_URL}create-game-api`, // Replace with your actual Supabase function URL
+        `${env.EXPO_PUBLIC_SUPABASE_API_URL}create-game`, // Replace with your actual Supabase function URL
         {
           method: "POST",
           headers: {

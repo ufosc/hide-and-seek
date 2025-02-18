@@ -1,9 +1,9 @@
 ---
 title: Supabase Edge Functions
-description: Developing with Supabase Edge Functions, using the create-game-api as an example.
+description: Developing with Supabase Edge Functions, using the create-game as an example.
 ---
 
-This document outlines best practices and troubleshooting tips for developing Supabase Edge Functions within this project, using the `create-game-api` function as a primary example.
+This document outlines best practices and troubleshooting tips for developing Supabase Edge Functions within this project, using the `create-game` function as a primary example.
 
 ## Core Concepts
 
@@ -20,7 +20,7 @@ When developing Supabase Edge Functions, follow these guidelines:
 
 ### 1. Data Validation and Type Safety
 
-- **Input Validation:** Mirroring the `create-game-api` example, create Zod schemas for both input validation and the expected return type of your API calls. This ensures that you're handling data correctly and providing consistent responses.
+- **Input Validation:** Mirroring the `create-game` example, create Zod schemas for both input validation and the expected return type of your API calls. This ensures that you're handling data correctly and providing consistent responses.
 - **Drizzle ORM:** Define your Drizzle table schemas to closely match your Zod schemas. This promotes consistency between your data models and database structure. Refer to the [Drizzle ORM documentation](https://orm.drizzle.team/) for detailed information on defining table schemas.
 
 ### 2. Dependency Management
@@ -40,10 +40,10 @@ Example:
 curl -X POST https://your-supabase-url/functions/v1/your-function-name -H "Authorization: Bearer your-supabase-key" -H "Content-Type: application/json" -d '{"key": "value"}'
 ```
 
-For example, when testing `create-game-api`, run:
+For example, when testing `create-game`, run:
 
 ```bash
-curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game-api' `
+curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-game' `
 --header 'Authorization: Bearer getYourBearerTokenFromSupabaseStart' `
 --header 'Content-Type: application/json' `
 --data '{"title": "My New Game"}'
@@ -52,6 +52,33 @@ curl -i --location --request POST 'http://127.0.0.1:54321/functions/v1/create-ga
 ### 2. Postman
 
 For more advanced testing, you can use Postman to create and manage HTTP requests. This tool provides a user-friendly interface for testing your Edge Functions and inspecting responses.
+
+#### Postman Setup
+
+Follow these steps to set up a POST request in Postman to test your Supabase Edge Functions, mirroring the `create-game` cURL example:
+
+1.  **Open Postman:** Launch the Postman application on your computer.
+2.  **Create a New Request:** Click the "+ New" button, then select "HTTP Request".
+3.  **Select POST Method:** In the method dropdown, choose "POST".
+4.  **Enter the Request URL:** Enter the URL of your Edge Function. For the `create-game` example, this would be `http://127.0.0.1:54321/functions/v1/create-game`.
+5.  **Add Headers:**
+    - Go to the "Headers" tab.
+    - Add a new header with the key `Authorization` and the value `Bearer getYourBearerTokenFromSupabaseStart`.
+    - Add another header with the key `Content-Type` and the value `application/json`.
+6.  **Add Request Body:**
+
+    - Go to the "Body" tab.
+    - Select the "raw" option and choose "JSON" from the dropdown.
+    - Enter the JSON payload for your request. For the `create-game` example, this would be:
+
+      ```json
+      {
+        "title": "My New Game"
+      }
+      ```
+
+7.  **Send the Request:** Click the "Send" button to send the request to your Edge Function.
+8.  **Inspect the Response:** Review the response from your Edge Function in the "Response" section of Postman. Check the status code, headers, and body to ensure that your function is working correctly.
 
 ## Troubleshooting
 
