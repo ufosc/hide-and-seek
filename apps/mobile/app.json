@@ -12,6 +12,11 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "extra": {
+      "EXPO_PUBLIC_SUPABASE_URL": "https://your-supabase-url",
+      "EXPO_PUBLIC_SUPABASE_ANON_KEY": "your-anon-key",
+      "EXPO_PUBLIC_SUPABASE_API_URL": "https://your-supabase-api-url"
+    },
     "updates": {
       "fallbackToCacheTimeout": 0
     },

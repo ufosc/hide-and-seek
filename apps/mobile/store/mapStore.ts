@@ -4,7 +4,7 @@ import {
   MapMarker,
   MapPolygon,
   MapCircle,
-} from "@repo/shared-types/mapTypes";
+} from "@repo/shared-types/src/mapTypes";
 
 import { LatLng } from "react-native-maps";
 

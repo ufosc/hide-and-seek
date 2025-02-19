@@ -7,7 +7,7 @@ import {
   MapPolygon,
   MapCircle,
   MapRegion,
-} from "@repo/shared-types/mapTypes";
+} from "@repo/shared-types/src/mapTypes";
 
 const GameMapScreen: React.FC = () => {
   // Type GameMapScreen as a functional component
