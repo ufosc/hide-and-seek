@@ -1,0 +1,196 @@
+# MapStore and MapComponent
+
+- The `MapStore` is the _model_ and _controller_ of all map data we use.
+- The `MapComponent` is the _view_. It displays the data from the `MapStore` and
+  allows user interaction, which in turn triggers actions in the `MapStore` to
+  update the data.
+
+## Technologies Used
+
+- **Zustand:** Used for creating a global state management solution. Zustand is
+  a small, fast, and un-opinionated state management library, ideal for React
+  applications. We use it to manage all map-related state in a centralized and
+  accessible way.
+- **react-native-maps:** This library provides the core map functionality in our
+  React Native app. It allows us to display interactive maps, markers, polygons,
+  circles, and more.
+- **TypeScript:** We are using TypeScript to ensure type safety in our codebase.
+  This helps catch errors early and makes our code more maintainable and
+  understandable.
+
+## MapStore (`mapStore.ts`)
+
+The `MapStore` is a Zustand store defined in `store/mapStore.ts`. It acts as the
+single source of truth for all map-related data and logic in our application. It
+manages the following key aspects of the map:
+
+**State Slices:**
+
+- **`region: MapRegion`**: This state slice holds the current viewport or
+  visible area of the map. It contains:
+
+  - `latitude`: The latitude of the center of the map region.
+  - `longitude`: The longitude of the center of the map region.
+  - `latitudeDelta`: The range of latitude that is displayed. Controls the zoom
+    level (smaller delta = more zoomed in).
+  - `longitudeDelta`: The range of longitude that is displayed. Controls the
+    zoom level.
+
+- **`markers: MapMarker[]`**: An array that stores data for all markers to be
+  displayed on the map. Each `MapMarker` object typically contains:
+
+  - `coordinate: LatLng`: The latitude and longitude coordinates of the marker.
+  - `title?: string`: Optional title for the marker (displayed in a callout).
+  - `description?: string`: Optional description for the marker (displayed in a
+    callout).
+
+- **`polygons: MapPolygon[]`**: An array storing data for polygons drawn on the
+  map. Each `MapPolygon` object includes:
+
+  - `coordinates: LatLng[]`: An array of `LatLng` objects defining the vertices
+    of the polygon.
+  - `fillColor?: string`: The fill color of the polygon.
+  - `strokeColor?: string`: The outline color of the polygon.
+  - `strokeWidth?: number`: The width of the polygon's outline.
+
+- **`circles: MapCircle[]`**: An array storing data for circles drawn on the
+  map. Each `MapCircle` object includes:
+
+  - `center: LatLng`: The latitude and longitude of the circle's center point.
+  - `radius: number`: The radius of the circle in meters.
+  - `fillColor?: string`: The fill color of the circle.
+  - `strokeColor?: string`: The outline color of the circle.
+  - `strokeWidth?: number`: The width of the circle's outline.
+
+- **`userLocation: { latitude: number | null, longitude: number | null } | null`**:
+  Stores the current user's location (latitude and longitude) fetched from the
+  device's GPS. Can be `null` if location is not yet available or permission is
+  denied.
+
+- **`isMapReady: boolean`**: A boolean flag indicating whether the `MapView`
+  component has fully loaded and is ready for interaction.
+
+- **`isDrawingPolygon: boolean`**: A flag to track whether the user is currently
+  in polygon drawing mode. When `true`, map taps will add points to the draft
+  polygon.
+
+- **`polygonDraftCoordinates: LatLng[]`**: An array to hold the coordinates of
+  the vertices that are currently being drawn to form a polygon. This is used to
+  visually represent the polygon as the user selects points.
+
+**Actions (Functions to Update State):**
+
+The `MapStore` also provides actions (functions) that components can call to
+update the map state. These actions ensure that state updates are consistent and
+predictable:
+
+- **Region Management:**
+
+  - `setRegion(newRegion: MapRegion)`: Updates the `region` state slice, causing
+    the map viewport to change.
+
+- **Marker Management:**
+
+  - `setMarkers(newMarkers: MapMarker[])`: Replaces the entire `markers` array
+    with a new array.
+  - `addMarker(newMarker: MapMarker)`: Adds a new marker to the `markers` array.
+  - `removeMarker(markerToRemove: MapMarker)`: Removes a specific marker from
+    the `markers` array.
+
+- **Polygon Management:**
+
+  - `setPolygons(newPolygons: MapPolygon[])`: Replaces the entire `polygons`
+    array.
+  - `addPolygon(newPolygon: MapPolygon)`: Adds a new polygon to the `polygons`
+    array.
+  - `removePolygon(polygonToRemove: MapPolygon)`: Removes a polygon from the
+    `polygons` array.
+
+- **Circle Management:**
+
+  - `setCircles(newCircles: MapCircle[])`: Replaces the entire `circles` array.
+  - `addCircle(newCircle: MapCircle)`: Adds a new circle to the `circles` array.
+  - `removeCircle(circleToRemove: MapCircle)`: Removes a circle from the
+    `circles` array.
+
+- **User Location Management:**
+
+  - `setUserLocation(location: { latitude: number, longitude: number } | null)`:
+    Updates the `userLocation` state with the user's GPS coordinates.
+  - `setIsMapReady(ready: boolean)`: Sets the `isMapReady` flag, usually called
+    when the `MapView` is ready.
+  - `onMapReadyHandler()`: A handler function intended to be passed to the
+    `MapView`'s `onMapReady` prop. It sets `isMapReady` to `true` and can
+    include other logic to execute when the map loads.
+
+- **Polygon Drawing Actions:**
+  - `startDrawingPolygon()`: Sets `isDrawingPolygon` to `true` and clears the
+    `polygonDraftCoordinates` array, initiating polygon drawing mode.
+  - `stopDrawingPolygon()`: Sets `isDrawingPolygon` to `false`, ending polygon
+    drawing mode.
+  - `addCoordinateToPolygonDraft(coordinate: LatLng)`: Adds a new `LatLng`
+    coordinate to the `polygonDraftCoordinates` array, extending the draft
+    polygon.
+  - `removeLastCoordinateFromPolygonDraft()`: Removes the last added coordinate
+    from the `polygonDraftCoordinates`, allowing users to undo point placements.
+  - `clearPolygonDraft()`: Empties the `polygonDraftCoordinates` array, clearing
+    the current polygon draft.
+  - `setFinalPolygon(finalPolygons: MapPolygon[])`: Used to set the finalized
+    polygon (e.g., after drawing is complete), adding it to the `polygons`
+    array.
+
+## MapComponent (`MapComponent.tsx`)
+
+The `MapComponent`, located in `components/MapComponent.tsx`, is a React Native
+functional component responsible for rendering the `react-native-maps` `MapView`
+and connecting it to the `MapStore`.
+
+**Key Features:**
+
+- **`MapView` Wrapper:** It encapsulates the `MapView` component from
+  `react-native-maps`, making it reusable throughout the application.
+- **Zustand Hook Integration:** It uses the `useMapStore` hook to access and
+  consume state and actions from the `MapStore`. This allows the `MapComponent`
+  to:
+  - **Display Map State:** Read the `region`, `markers`, `polygons`, `circles`,
+    `userLocation`, `isDrawingPolygon`, and `polygonDraftCoordinates` state
+    slices from the `MapStore` and render the corresponding map elements.
+  - **Update Map State:** Call actions from the `MapStore` (like `setRegion`,
+    `addMarker`, etc.) in response to user interactions or other events. For
+    example, it calls `setRegion` when the map's viewport changes via user
+    panning or zooming.
+- **Dynamic Rendering:** It dynamically renders `MapView.Marker`,
+  `MapView.Polygon`, and `MapView.Circle` components based on the data in the
+  `markers`, `polygons`, and `circles` arrays from the `MapStore`.
+- **Draft Polygon Rendering:** It renders a `MapView.Polygon` to visualize the
+  polygon currently being drawn based on `polygonDraftCoordinates`. It also
+  renders `MapView.Marker` components at each point of the draft for better
+  visual feedback.
+- **User Location Marker:** It renders a `MapView.Marker` to display the user's
+  current location using the `userLocation` state from the `MapStore`.
+- **Conditional `onPress` Prop:** It accepts an optional `onPress` prop. When
+  provided and when polygon drawing mode (`isDrawingPolygon` in `MapStore`) is
+  active, it passes this `onPress` handler to the underlying `MapView`, enabling
+  interactive point selection for polygon drawing in the parent component.
+
+## Relationship between MapStore and MapComponent
+
+The `MapStore` and `MapComponent` work together in a unidirectional data flow
+pattern:
+
+1.  **Data Source (MapStore):** The `MapStore` is the central repository of all
+    map-related data and logic. It manages the state for the map's region,
+    annotations (markers, polygons, circles), user location, and polygon drawing
+    state.
+
+2.  **View (MapComponent):** The `MapComponent` acts as the view layer. It uses
+    the `useMapStore` hook to "subscribe" to and read state changes from the
+    `MapStore`. When the state in the `MapStore` updates, the `MapComponent`
+    re-renders and updates the `MapView` to reflect the new state (e.g., adding
+    markers, redrawing polygons, changing the map region).
+
+3.  **Interaction & Actions:** User interactions within the `MapComponent`
+    (e.g., map panning, zooming, tapping) or events triggered in parent
+    components (e.g., button presses in `GameMapScreen`) can lead to actions
+    being dispatched to the `MapStore`. These actions then update the state
+    within the `MapStore`.

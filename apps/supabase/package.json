@@ -1,0 +1,15 @@
+{
+  "name": "supabase",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "dev": "npx supabase stop && npx supabase start && npx supabase functions serve"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.39.3",
+    "supabase": "^2.12.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.30.4"
+  }
+}

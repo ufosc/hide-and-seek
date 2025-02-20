@@ -1,0 +1,143 @@
+---
+title: Contributing
+---
+
+import { Callout } from "nextra/components";
+
+# Contributing to OSC-Hide-And-Seek
+
+## 1. Clone the repository
+
+- First, navigate to our Github repository and find the green code button near
+  the top right. Click on it and copy the link that appears in the dropdown.
+
+- Next, in your terminal/command prompt, navigate to the folder/location you
+  would like your repository to be in.
+
+- Then clone your repository and enter the directory it creates:
+
+```cmd
+$ git clone <paste your repository address>
+$ cd <the newly created directory>
+```
+
+## 2. Find an issue to work on
+
+<Callout type="info">
+Unlike other OSC source projects, we will **not** be assigining issues. Instead,
+work on issues will be kept track of using feature branches. When you start
+working on an issue, rather than completing work on your own fork, you will
+create a branch on the main repository.
+
+This prevents the problem of work being lost if someone doesn't finish their
+work on an issue. If work on an issue gets abandoned, someone else can pick up
+from where it left off.
+
+</Callout>
+
+1. Look at the issues page on Github to find issuess that are currently open.
+
+2. Check if someone has started working on the issue by looking for an
+   `in progress` tag. Check if someone else has already created a feature branch
+   for the issue you want to work on by clicking on the branch dropdown in
+   github and then clicking `View all branches`
+
+   <img
+     src="/branch-dropdown.webp"
+     alt="dropdown"
+     style={{ maxHeight: "300px" }}
+   />
+
+3. If your issue has not been started yet, leave a comment saying that you want
+   to work on it so the tech leads can move the issue into `in progress`
+
+   If any branch has not had activity for **five days** or more, or is marked
+   with the `stale` label, you can start working on that branch, otherwise find
+   another issue to work on.
+
+## 3. Create a new branch
+
+<Callout type="info">
+  If you are working on a feature branch that already exists, you can skip this
+  step and instead run `git checkout <feature-branch-name>` in the terminal
+</Callout>
+
+1. Switch to the development branch by running `git checkout development`
+
+2. Ensure that your local repository is up to date by running `git pull`
+
+3. Create a feature branch according to the following naming conventions by
+   running `git branch <feature-branch-name>` (without brackets)
+
+4. Switch to the newly created branch with `git checkout <feature-branch-name>`
+
+<Callout type="warning">
+  Do not create feature branches off of other feature branches. New branches
+  should only be created from the development branch. If you want to work with
+  someone on their branch, feel free to ask to join them on it.
+</Callout>
+
+### Branch naming conventions
+
+Branches should be prefixed with their branch type. There are two main branch
+types you will create:
+
+1. Feature branches are used for developing new features. Use the prefix
+   `feature/`. For example, `feature/3/login-system`
+2. Bugfix branches are used to fix bugs in the code. Use the prefix `bugfix/`.
+   For example, `bugfix/5/header-styling`.
+
+In addition, to these prefixes, branch names must follow additional criteria:
+
+- **Include the issue number:** If your branch is realted to an issue, include
+  the issue number after the prefix. For example, `bugfix/12/map-crashing`
+- **Lowercase and hyphen-separated:** Use only lowercase letters and hypens to
+  separate words.
+- **No continuous hyphens:** Do not use multiple hypens in a row.
+  `feature/-new--login` can be hard to read
+- \*\*Optionally, you can include your username after the branchname, like
+  `feature/3/login-system-dyland88`
+
+## 4. Create commits and push to the main repository
+
+<Callout type="info">
+  Each time before you commit your code, be sure to run `npx prettier --write .`
+  and `npm run lint` to ensure your code has consistent formatting .
+</Callout>
+
+- While writing code, you should often create commits with `git add .` and
+  `git commit -m <commit message>`
+
+- Frequently push your new commits to the main repository so other people can
+  see your work with `git push origin`. This ensures that other people won't
+  work on your issue at the same time!
+
+## 5. Create a pull request
+
+Once you have finished working on the issue, start a pull request to merge your
+branch into the development branch. One of the tech leads will approve your code
+before it will be fully merged.
+
+To issue a pull request:
+
+1. On Github, navigate to the main page of the repository
+2. In the "branch" menu, choose the branch that contains your commits
+
+   <img
+     src="/branch-dropdown.webp"
+     alt="dropdown"
+     style={{ maxHeight: "300px" }}
+   />
+
+3. Above the list of files, in the yellow banner, click Compare & pull request
+   to create a pull request for the associated branch.
+
+<img
+  src="/pull-request-compare.webp"
+  alt="dropdown"
+  style={{ maxHeight: "300px" }}
+/>
+
+4. Type a title in and description for your pull request
+5. **Ensure that the description contains text `Closes #<issue-number>` so the
+   issue will be linked. For example `Closes #5`**
