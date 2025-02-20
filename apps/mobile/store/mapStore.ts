@@ -32,7 +32,7 @@ interface MapActions {
   addCircle: (newCircle: MapCircle) => void;
   removeCircle: (circleToRemove: MapCircle) => void;
   setUserLocation: (
-    location: { latitude: number; longitude: number } | null,
+    location: { latitude: number; longitude: number } | null
   ) => void;
   setIsMapReady: (ready: boolean) => void;
   onMapReadyHandler: () => void;

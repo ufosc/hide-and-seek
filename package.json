@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "my-turborepo",
   "private": true,
   "scripts": {
@@ -21,4 +22,29 @@
     "apps/*",
     "packages/*"
   ]
+=======
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:docs": "turbo run dev --filter=docs",
+    "dev:mobile": "turbo run dev --filter=mobile",
+    "dev:supabase": "turbo run dev --filter=supabase",
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\" --ignore-path .gitignore"
+  },
+  "devDependencies": {
+    "prettier": "^3.1.1",
+    "turbo": "^2.4.1"
+  },
+  "packageManager": "yarn@1.22.19",
+  "engines": {
+    "node": ">=18"
+  },
+  "name": "with-react-native-web"
+>>>>>>> 81ce453a39d93dff2dfda0240fb511f6e901d647
 }

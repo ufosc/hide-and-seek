@@ -27,7 +27,7 @@ const CreateGameForm = () => {
             // Add any necessary authorization headers here
           },
           body: JSON.stringify({ title, description } as CreateGameInput),
-        },
+        }
       );
       console.log({ title, description });
 
@@ -36,14 +36,14 @@ const CreateGameForm = () => {
         throw new Error(
           `Failed to create game: ${response.status} - ${
             errorData.error || JSON.stringify(errorData)
-          }`,
+          }`
         );
       }
 
       const newGame = await response.json();
       Alert.alert(
         "Game Created",
-        `Successfully created game with id: ${newGame.id}`,
+        `Successfully created game with id: ${newGame.id}`
       );
       setTitle("");
       setDescription("");
