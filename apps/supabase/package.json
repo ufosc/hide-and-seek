@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "drizzle-orm": "^0.39.3",
-    "supabase": "^2.12.1"
+    "supabase": "^2.15.8"
   },
   "devDependencies": {
     "drizzle-kit": "^0.30.4"
