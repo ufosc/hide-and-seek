@@ -34,7 +34,7 @@ This repo contains three main folders: _docs_, _mobile_, and _supabase_
 |-- ...other files...
 ```
 
-## Running the mobile app, server, and docs
+## Getting Started
 
 1. Install the package manager, yarn (must be version 1)
 
@@ -42,13 +42,26 @@ This repo contains three main folders: _docs_, _mobile_, and _supabase_
 npm install -g yarn@1
 ```
 
-1. Install dependencies
+2. Install dependencies
 
 ```
 yarn install
 ```
 
-2. Start the program
+3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) to host the server edge functions
+
+4. Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
+
+5. To test server functions, download [Postman](https://www.postman.com/)
+
+6. Create env files by copying the .env.example files inside `packages/schema` and `supabase/functions` and renaming the copies to `.env`
+
+7. Make a [Supabase](https://supabase.com) accont
+
+   - Get your connection string by clicking the connect button at the top of the page and copying the `transaction pooler` string
+   - Add your connection string and password into the env files inside `packages/schema` and `supabase/functions`
+
+8. Start the program
 
 ```
 yarn run dev
@@ -57,11 +70,13 @@ yarn run dev
 You can also run each package separately with the following commands:
 
 - To run the docs project:
+
   ```
   yarn run dev:docs
   ```
 
 - To run the mobile app:
+
   ```
   yarn run dev:mobile
   ```
@@ -71,9 +86,14 @@ You can also run each package separately with the following commands:
   yarn run dev:supabase
   ```
 
+## Troubleshooting
+
+- `ngrok tunnel took too long to connect`
+  - Try disabling the windows firewall
+
 ## Adding to the documentation
 
-Edit Markdown files in the `pages/` directory. Your changes will be
+Edit Markdown files in the `apps/content/` directory. Your changes will be
 live-reloaded by Nextra.
 
 ## Code Formatting & Linting
