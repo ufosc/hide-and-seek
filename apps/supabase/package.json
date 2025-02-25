@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "supabase stop && supabase start && supabase functions serve"
+    "dev": "supabase functions serve --env-file ./functions/.env"
   },
   "dependencies": {
     "drizzle-orm": "^0.39.3"
