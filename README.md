@@ -54,14 +54,25 @@ yarn install
 
 5. To test server functions, download [Postman](https://www.postman.com/)
 
-6. Create env files by copying the .env.example files inside `packages/schema` and `supabase/functions` and renaming the copies to `.env`
+6. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
 
-7. Make a [Supabase](https://supabase.com) accont
+7. Make a [Supabase](https://supabase.com) account
 
    - Get your connection string by clicking the connect button at the top of the page and copying the `transaction pooler` string
    - Add your connection string and password into the env files inside `packages/schema` and `supabase/functions`
+   - Make sure that the .env inside `packages/schema` and `apps/supabase/functions` are identical
 
-8. Start the program
+8. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
+
+9. Make a [ngrok](https://dashboard.ngrok.com/) account
+
+   - Run `ngrok config add-authtoken <tokenFromAccount>`
+
+10. Start ngrok with `ngrok http 54321`
+
+    - Copy the forwarded address ngrok gives you into `apps/mobile/.env`. Append `/functions/v1/` to the end.
+
+11. Start the program by running:
 
 ```
 yarn run dev

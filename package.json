@@ -4,6 +4,9 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:docs": "turbo run dev --filter=docs",
+    "dev:mobile": "turbo run dev --filter=mobile",
+    "dev:supabase": "turbo run dev --filter=supabase",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
