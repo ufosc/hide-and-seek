@@ -49,7 +49,9 @@ yarn install
 ```
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) to host the server edge functions
-    - If you're running this project on WSL, please instead install [Docker on Linux](https://docs.docker.com/desktop/setup/install/linux/).
+
+    - If you're running this project on WSL, please instead install [Docker on Linux](https://docs.docker.com/desktop/setup/install/linux/) and follow the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/). 
+    
     - Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
 
 4. To test server functions, download [Postman](https://www.postman.com/)
