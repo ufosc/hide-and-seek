@@ -28,6 +28,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="list-games"
+        options={{
+          title: "List",
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",

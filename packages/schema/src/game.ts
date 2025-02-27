@@ -28,4 +28,8 @@ export const GameSchema = CreateGameSchema.extend({
   createdAt: z.date(),
 });
 
+export const GamesSchema = z.array(GameSchema);
+
+export type Games = z.infer<typeof GamesSchema>;
+
 export type Game = z.infer<typeof GameSchema>; // Type for a Game object
