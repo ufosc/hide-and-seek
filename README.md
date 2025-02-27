@@ -50,9 +50,8 @@ yarn install
 
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) to host the server edge functions
 
-    - If you're running this project on WSL, please instead install [Docker on Linux](https://docs.docker.com/desktop/setup/install/linux/) and follow the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/). 
-    
-    - Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
+   - If you're running this project on WSL, please instead install [Docker on Linux](https://docs.docker.com/desktop/setup/install/linux/) and follow the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/).
+   - Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
 
 4. To test server functions, download [Postman](https://www.postman.com/)
 
@@ -66,16 +65,18 @@ yarn install
 
 7. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
 
+   - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
+
 8. Make a [ngrok](https://dashboard.ngrok.com/) account
 
    - Run `ngrok config add-authtoken <tokenFromAccount>`
 
 9. Start ngrok with `ngrok http 54321`
 
-    - Copy the forwarded address ngrok gives you into `apps/mobile/.env`'s `EXPO_PUBLIC_SUPABASE_API_URL` entry. Append `/functions/v1/` to the end.
-    - Ex: `EXPO_PUBLIC_SUPABASE_API_URL=https://8165-128-227-1-18.ngrok-free.app/functions/v1/`
+   - Copy the forwarded address ngrok gives you into `apps/mobile/.env`'s `EXPO_PUBLIC_SUPABASE_API_URL` entry. Append `/functions/v1/` to the end.
+   - Ex: `EXPO_PUBLIC_SUPABASE_API_URL=https://8165-128-227-1-18.ngrok-free.app/functions/v1/`
 
-11. Start the program by running:
+10. Start the program by running:
 
 ```
 yarn run dev
