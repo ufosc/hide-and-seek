@@ -13,6 +13,7 @@ import { useAuthStore } from "@/store/authStore";
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
   const router = useRouter();
   const { signUpWithEmail, isLoading } = useAuthStore();
 
@@ -50,6 +51,18 @@ export default function SignUpPage() {
               onChangeText={setPassword}
               value={password}
             />
+          </View>
+
+          <View>
+            <TextInput
+              style={styles.input}
+              placeholder="Your Name Here"
+              placeholderTextColor="#A3A3A3"
+              onChangeText={setUserName}
+              value={userName}
+            >
+
+            </TextInput>
           </View>
 
           <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
