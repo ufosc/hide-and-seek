@@ -1,5 +1,6 @@
-import { View, Text, Button, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import { useAuthStore } from "@/store/authStore";
+import { Button } from "tamagui";
 
 export default function ProfileScreen() {
   const user = useAuthStore((state) => state.user);
@@ -9,7 +10,9 @@ export default function ProfileScreen() {
     <SafeAreaView>
       <Text>Profile Screen</Text>
       {user && <Text>User ID: {user.id}</Text>}
-      <Button title="Sign Out" onPress={signOut} />
+      <Button size={"$5"} backgroundColor={"%primary"} onPress={signOut}>
+        Sign Out
+      </Button>
     </SafeAreaView>
   );
 }
