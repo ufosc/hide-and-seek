@@ -52,11 +52,7 @@ export default function SignUpPage() {
             />
           </View>
 
-          <TouchableOpacity
-            style={styles.signUpButton}
-            onPress={handleSignUp}
-            disabled={isLoading}
-          >
+          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
             <Text style={styles.signUpText}>Sign Up</Text>
           </TouchableOpacity>
         </View>

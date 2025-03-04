@@ -7,6 +7,7 @@ export const games = pgTable("games", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),
   createdAt: timestamp("created_at").defaultNow(),
+  description: text("description"),
 });
 
 // Zod schema for CREATING a new game (input validation)
@@ -16,7 +17,6 @@ export const CreateGameSchema = z.object({
     .min(3)
     .max(100, "Title must be between 3 and 100 characters"),
   description: z.string().max(500).nullish(), // Optional description
-  metadata: z.record(z.any()).nullish(), // Allow any JSON-like structure for metadata (optional)
 });
 
 export type CreateGameInput = z.infer<typeof CreateGameSchema>; // Input type for creating a game
