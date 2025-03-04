@@ -3,7 +3,7 @@
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
   "globalEnv": ["EXPO_PUBLIC_SUPABASE_URL", "EXPO_PUBLIC_SUPABASE_ANON_KEY", "EXPO_PUBLIC_SUPABASE_API_URL",
-                  "DATABASE_URL"
+                  "DATABASE_URL" 
   ],
   "globalDependencies": [".env"], 
   "tasks": {
