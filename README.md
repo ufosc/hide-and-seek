@@ -17,6 +17,7 @@ If you want to get started contributing, check out our
 
 This repo is structured as a monorepo and contains the following main directories:
 
+```
 |-- apps/
 |   |-- docs/ : Next.js documentation project using Nextra for documentation
 |   |   |-- pages/ : Documentation pages
@@ -29,6 +30,7 @@ This repo is structured as a monorepo and contains the following main directorie
 |   |-- schema/ : Database schema definitions and related files
 |   |-- shared-types/ : Types shared between different parts of the project
 |   |-- typescript-config/ : Base TypeScript configuration
+```
 
 ## Getting Started
 
