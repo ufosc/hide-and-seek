@@ -54,22 +54,24 @@ yarn install
    - (on Windows only) Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
 
 4. To test server functions, download [Postman](https://www.postman.com/)
+
    - Recommended, but not necessary
 
+6. Make a [Supabase](https://supabase.com) account and project
 
-5. Make a [Supabase](https://supabase.com) account
+   - Turn off email authentication: Authentication -> Sign In / Up -> Email -> Confirm email.
 
-6. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
+7. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
 
    - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
 
-7. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
+8. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
 
    - Run `ngrok config add-authtoken <tokenFromAccount>`
 
-8. Start ngrok with `ngrok http 54321`
+9. Start ngrok with `ngrok http 54321`
 
-9. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
+10. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
 
     - Follow the steps in each ```.env.example``` to fill out each required key.
 
