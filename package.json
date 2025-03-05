@@ -7,11 +7,15 @@
     "dev:docs": "turbo run dev --filter=docs",
     "dev:mobile": "turbo run dev --filter=mobile",
     "dev:supabase": "turbo run dev --filter=supabase",
+    "supabase:status": "turbo run status --filter=supabase",
+    "supabase:start": "turbo run start --filter=supabase",
+    "supabase:stop": "turbo run stop --filter=supabase",
+    "db:push": "cd ./packages/schema && drizzle-kit push",
+    "db:migrate": "cd ./packages/schema && drizzle-kit migrate",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
-  "devDependencies": {
     "prettier": "^3.5.0",
     "turbo": "^2.4.2",
     "typescript": "5.7.3"
