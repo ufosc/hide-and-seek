@@ -1,8 +1,5 @@
 {
   "name": "@repo/shared-types",
-  "exports": {
-    "mapTypes": "./src/mapTypes"
-  },
   "version": "1.0.0",
   "description": "",
   "keywords": [],
