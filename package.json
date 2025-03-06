@@ -16,7 +16,6 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types"
   },
-  "prettier": "^3.5.0",
   "turbo": "^2.4.2",
   "typescript": "5.7.3",
   "engines": {
@@ -26,5 +25,8 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "prettier": "^3.5.3"
+  }
 }

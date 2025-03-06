@@ -21,7 +21,7 @@ export const gameRouter = router({
           message: "Database connection not available",
         });
       }
-      
+
       try {
         // Insert the new game into the database
         const [insertedGame] = await ctx.db
@@ -33,7 +33,7 @@ export const gameRouter = router({
             bounds: input.bounds,
           })
           .returning();
-          
+
         // Return the created game
         return insertedGame;
       } catch (error) {
@@ -45,26 +45,24 @@ export const gameRouter = router({
       }
     }),
 
-  list: publicProcedure
-    .output(GamesSchema)
-    .query(async ({ ctx }) => {
-      if (!ctx.db) {
-        throw new TRPCError({
-          code: "UNAUTHORIZED",
-          message: "Database connection not available",
-        });
-      }
+  list: publicProcedure.output(GamesSchema).query(async ({ ctx }) => {
+    if (!ctx.db) {
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "Database connection not available",
+      });
+    }
 
-      try {
-        // Fetch all games from the database
-        const gamesList = await ctx.db.select().from(games);
-        return gamesList;
-      } catch (error) {
-        console.error("Error fetching games:", error);
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-          message: "Failed to fetch games",
-        });
-      }
-    }),
+    try {
+      // Fetch all games from the database
+      const gamesList = await ctx.db.select().from(games);
+      return gamesList;
+    } catch (error) {
+      console.error("Error fetching games:", error);
+      throw new TRPCError({
+        code: "INTERNAL_SERVER_ERROR",
+        message: "Failed to fetch games",
+      });
+    }
+  }),
 });

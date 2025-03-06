@@ -26,10 +26,10 @@ Deno.serve(async (req) => {
     if (!connectionString) {
       throw new Error("DATABASE_URL environment variable not found");
     }
-    
+
     const client = postgres(connectionString, { prepare: false });
     const db = drizzle({ client });
-    
+
     // Handle the tRPC request
     return await fetchRequestHandler({
       endpoint: "/trpc",
@@ -37,14 +37,16 @@ Deno.serve(async (req) => {
       router: appRouter,
       createContext: async () => createTRPCContext({ db }),
       onError: ({ path, error }) => {
-        console.error(`❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`);
+        console.error(
+          `❌ tRPC failed on ${path ?? "<no-path>"}: ${error.message}`,
+        );
       },
     });
   } catch (error) {
     console.error("tRPC request handler error:", error);
     return new Response(JSON.stringify({ error: "Internal server error" }), {
       status: 500,
-      headers: { 
+      headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Origin": "*",
       },

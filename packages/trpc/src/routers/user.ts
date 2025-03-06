@@ -13,13 +13,15 @@ export const userRouter = router({
         // other user data
       };
     }),
-  
+
   updateProfile: publicProcedure
-    .input(z.object({
-      userId: z.string(),
-      name: z.string().optional(),
-      // other fields
-    }))
+    .input(
+      z.object({
+        userId: z.string(),
+        name: z.string().optional(),
+        // other fields
+      }),
+    )
     .mutation(({ input }) => {
       // Implementation here
       return { success: true };

@@ -55,46 +55,47 @@ yarn install
 
    - Recommended, but not necessary
 
-6. Make a [Supabase](https://supabase.com) account and project
+5. Make a [Supabase](https://supabase.com) account and project
 
    - Turn off email authentication: Authentication -> Sign In / Up -> Email -> Confirm email.
 
-8. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
+6. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
 
    - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
 
-9. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
+7. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI.
 
    - Run `ngrok config add-authtoken <tokenFromAccount>`
 
-10. Start ngrok with `ngrok http 54321`
+8. Start ngrok with `ngrok http 54321`
 
-11. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
+9. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
 
-    - Follow the steps in each ```.env.example``` to fill out each required key.
+   - Follow the steps in each `.env.example` to fill out each required key.
 
 ### Running App
 
 Every time you run the app, you will need to run some of the following commands.
 
-*Pushing to Database*: You will need to push your Database tables to supabase by running:
+_Pushing to Database_: You will need to push your Database tables to supabase by running:
 
 ```
 yarn run db:push
 ```
 
-If this doesn't work, try resetting your database password in Supabase: 
-   - Project Settings -> database -> reset password
+If this doesn't work, try resetting your database password in Supabase:
 
-*Running Ngrok*
+- Project Settings -> database -> reset password
+
+_Running Ngrok_
 
 If you don't have ngrok open, run it with:
 
-```ngrok http 54321```
+`ngrok http 54321`
 
 Copy the forwarded url and paste it into `apps/mobile/.env` as the .env.example says. (Don't forget the `/functions/v1` at the end)
 
-*Running the App*: You may run the frontend and backend either together:
+_Running the App_: You may run the frontend and backend either together:
 
 ```
 yarn run dev

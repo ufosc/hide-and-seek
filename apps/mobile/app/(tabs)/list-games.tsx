@@ -10,12 +10,7 @@ import {
 import { api } from "@/lib/trpc";
 
 const ListGames = () => {
-  const {
-    isLoading,
-    isError,
-    data: games,
-    error,
-  } = api.game.list.useQuery();
+  const { isLoading, isError, data: games, error } = api.game.list.useQuery();
 
   if (isLoading) {
     return (

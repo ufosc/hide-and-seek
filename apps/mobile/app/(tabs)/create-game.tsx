@@ -19,7 +19,7 @@ const CreateGameForm = () => {
     onSuccess: (data) => {
       Alert.alert(
         "Game Created",
-        `Successfully created game with id: ${data.id}`
+        `Successfully created game with id: ${data.id}`,
       );
       setTitle("");
       setDescription("");
@@ -35,7 +35,7 @@ const CreateGameForm = () => {
       title,
       description: description || null,
     };
-    
+
     createGameMutation.mutate(input);
   };
 
@@ -54,10 +54,10 @@ const CreateGameForm = () => {
         value={description}
         onChangeText={setDescription}
       />
-      <Button 
-        title={createGameMutation.isPending ? "Creating..." : "Create Game"} 
+      <Button
+        title={createGameMutation.isPending ? "Creating..." : "Create Game"}
         onPress={handleSubmit}
-        disabled={createGameMutation.isPending} 
+        disabled={createGameMutation.isPending}
       />
     </SafeAreaView>
   );

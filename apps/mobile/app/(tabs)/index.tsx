@@ -20,16 +20,16 @@ const GameMapScreen: React.FC = () => {
   const startDrawingPolygon = useMapStore((state) => state.startDrawingPolygon);
   const stopDrawingPolygon = useMapStore((state) => state.stopDrawingPolygon);
   const addCoordinateToPolygonDraft = useMapStore(
-    (state) => state.addCoordinateToPolygonDraft
+    (state) => state.addCoordinateToPolygonDraft,
   );
 
   const removeLastCoordinateFromPolygonDraft = useMapStore(
-    (state) => state.removeLastCoordinateFromPolygonDraft
+    (state) => state.removeLastCoordinateFromPolygonDraft,
   );
   const clearPolygonDraft = useMapStore((state) => state.clearPolygonDraft);
   const setFinalPolygon = useMapStore((state) => state.setFinalPolygon);
   const polygonDraftCoordinates = useMapStore(
-    (state) => state.polygonDraftCoordinates
+    (state) => state.polygonDraftCoordinates,
   );
 
   useEffect(() => {
