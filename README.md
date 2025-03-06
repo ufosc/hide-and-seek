@@ -57,7 +57,12 @@ yarn install
 
 5. Make a [Supabase](https://supabase.com) account
 
-6. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
+   - Get your connection string by clicking the connect button at the top of the page and copying the `transaction pooler` string
+   - Add your connection string and password into the env files inside `packages/schema` and `supabase/functions`
+   - Make sure that the .env inside `packages/schema` and `apps/supabase/functions` are identical
+   - Turn off email authentication: Authentication -> Sign In / Up -> Email -> Confirm email.
+
+7. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
 
    - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
 
