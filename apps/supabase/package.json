@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
+    "start": "supabase start",
+    "stop": "supabase stop",
+    "status": "supabase status",
     "dev": "supabase functions serve --env-file ./functions/.env"
   },
   "dependencies": {

@@ -16,6 +16,16 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "start": {
+      "cache": false
+    },
+    "stop": {
+      "cache": false
+    },
+    "status": {
+      "cache": false,
+      "outputLogs": "full"
     }
   }
 }

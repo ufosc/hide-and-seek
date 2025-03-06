@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { useQuery } from "@tanstack/react-query";
 
-import { Games } from "@repo/schema/src/game";
+import { Games } from "@repo/shared-types/games.api";
 
 const ListGames = () => {
   const {
@@ -25,7 +25,7 @@ const ListGames = () => {
         `${env.EXPO_PUBLIC_SUPABASE_API_URL}list-games`,
         {
           headers: {
-            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_ANON_KEY}`,
+            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_API_ANON_KEY}`,
             // Add any necessary authorization headers here
           },
         }
