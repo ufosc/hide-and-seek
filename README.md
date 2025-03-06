@@ -9,14 +9,13 @@ If you want to get started contributing, check out our
 
 ## Helpful Links
 
-🖌️[Figma Mockup](https://www.figma.com/design/SNNLRoLLpGsOfBPUgeeoaw/OSC-Hide-and-Seek?node-id=2-2&t=4aAjksykaIuTcMgX-1)
-
 📖 [Documentation](https://hide-and-seek-lac.vercel.app/)
 
 ## Project Structure
 
 This repo is structured as a monorepo and contains the following main directories:
 
+```
 |-- apps/
 |   |-- docs/ : Next.js documentation project using Nextra for documentation
 |   |   |-- pages/ : Documentation pages
@@ -29,6 +28,7 @@ This repo is structured as a monorepo and contains the following main directorie
 |   |-- schema/ : Database schema definitions and related files
 |   |-- shared-types/ : Types shared between different parts of the project
 |   |-- typescript-config/ : Base TypeScript configuration
+```
 
 ## Getting Started
 
@@ -52,10 +52,10 @@ yarn install
    - (on Windows only) Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
 
 4. To test server functions, download [Postman](https://www.postman.com/)
+
    - Recommended, but not necessary
 
-
-5. Make a [Supabase](https://supabase.com) account
+6. Make a [Supabase](https://supabase.com) account and project
 
    - Get your connection string by clicking the connect button at the top of the page and copying the `transaction pooler` string
    - Add your connection string and password into the env files inside `packages/schema` and `supabase/functions`
@@ -66,13 +66,13 @@ yarn install
 
    - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
 
-7. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
+8. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
 
    - Run `ngrok config add-authtoken <tokenFromAccount>`
 
-8. Start ngrok with `ngrok http 54321`
+9. Start ngrok with `ngrok http 54321`
 
-9. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
+10. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
 
     - Follow the steps in each ```.env.example``` to fill out each required key.
 
