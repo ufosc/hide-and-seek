@@ -1,7 +1,10 @@
 import type { Config } from "drizzle-kit";
 import { defineConfig } from "drizzle-kit";
 import * as dotenv from "dotenv";
-dotenv.config({ path: "./env" });
+import path from "path";
+
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+console.log("Loaded ENV:", process.env.EXPO_PUBLIC_SUPABASE_URL);
 
 export default defineConfig({
   schema: "./src/schema.ts",
