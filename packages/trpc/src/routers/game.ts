@@ -29,8 +29,6 @@ export const gameRouter = router({
           .values({
             title: input.title,
             description: input.description,
-            creatorId: input.creatorId,
-            bounds: input.bounds,
           })
           .returning();
 
