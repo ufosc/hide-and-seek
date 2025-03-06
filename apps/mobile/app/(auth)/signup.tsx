@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Alert,
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Alert, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
 import { useAuthStore } from "@/store/authStore";
 
@@ -28,14 +21,16 @@ export default function SignUpPage() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerForm}>
-        <Text style={styles.title}>Create Account</Text>
+    <View className="flex-1 bg-gray-900 justify-between px-5 pb-10 pt-20">
+      <View className="max-w-md w-full mx-auto space-y-4">
+        <Text className="text-white text-2xl font-bold mb-12 text-center">
+          Create Account
+        </Text>
 
-        <View style={styles.form}>
+        <View>
           <View>
             <TextInput
-              style={styles.input}
+              className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
               placeholder="Email"
               placeholderTextColor="#A3A3A3"
               keyboardType="email-address"
@@ -43,7 +38,7 @@ export default function SignUpPage() {
               value={email}
             />
             <TextInput
-              style={styles.input}
+              className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
               placeholder="Password"
               placeholderTextColor="#A3A3A3"
               secureTextEntry
@@ -52,79 +47,23 @@ export default function SignUpPage() {
             />
           </View>
 
-          <TouchableOpacity style={styles.signUpButton} onPress={handleSignUp}>
-            <Text style={styles.signUpText}>Sign Up</Text>
+          <TouchableOpacity
+            className="w-full bg-white py-4 rounded-lg items-center mb-5"
+            onPress={handleSignUp}
+          >
+            <Text className="text-black font-bold text-base">Sign Up</Text>
           </TouchableOpacity>
         </View>
       </View>
 
-      <View style={styles.loginContainer}>
-        <Text style={styles.loginText}>Already have an account?</Text>
+      <View className="flex-row justify-center gap-3 my-2">
+        <Text className="text-gray-400 text-center">
+          Already have an account?
+        </Text>
         <TouchableOpacity onPress={() => router.replace("/(auth)/login")}>
-          <Text style={styles.loginLink}>Log in</Text>
+          <Text className="text-white font-bold">Log in</Text>
         </TouchableOpacity>
       </View>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#1A1525",
-    justifyContent: "space-between",
-    paddingHorizontal: 20,
-    paddingBottom: 40,
-    paddingTop: 80,
-  },
-  containerForm: {
-    maxWidth: 450,
-    width: "100%",
-    marginHorizontal: "auto",
-    gap: 16,
-  },
-  form: {},
-  title: {
-    color: "white",
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 50,
-    textAlign: "center",
-  },
-  input: {
-    width: "100%",
-    backgroundColor: "#2A213D",
-    color: "white",
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 20,
-  },
-  signUpButton: {
-    width: "100%",
-    backgroundColor: "white",
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  signUpText: {
-    color: "black",
-    fontWeight: "bold",
-    fontSize: 16,
-  },
-  loginContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 12,
-    margin: 10,
-  },
-  loginText: {
-    color: "#A3A3A3",
-    textAlign: "center",
-  },
-  loginLink: {
-    color: "white",
-    fontWeight: "bold",
-    cursor: "pointer",
-  },
-});
