@@ -9,32 +9,32 @@ If you want to get started contributing, check out our
 
 ## Helpful Links
 
-🖌️
-[Figma Mockup](https://www.figma.com/design/SNNLRoLLpGsOfBPUgeeoaw/OSC-Hide-and-Seek?node-id=2-2&t=4aAjksykaIuTcMgX-1)
+🖌️[Figma Mockup](https://www.figma.com/design/SNNLRoLLpGsOfBPUgeeoaw/OSC-Hide-and-Seek?node-id=2-2&t=4aAjksykaIuTcMgX-1)
 
 📖 [Documentation](https://hide-and-seek-lac.vercel.app/)
 
 ## Project Structure
 
-This repo contains three main folders: _docs_, _mobile_, and _supabase_
+This repo is structured as a monorepo and contains the following main directories:
 
 ```
-|-- docs/             # Next.js docs project using Nextra for documentation
-|   |-- pages/        # Documentation pages
-|
-|-- mobile/           # Mobile app project (React Native)
-|   |-- components/   # UI components (e.g., HelloWave.tsx)
-|   |-- ...other code...
-|
-|-- supabase/         # Supabase backend functions and configuration
-|   |-- functions/    # Database triggers and API functions
-|   |-- ...other code...
-|
-|-- package.json      # Root project configuration for prettier only (as of right now)
-|-- ...other files...
+|-- apps/
+|   |-- docs/ : Next.js documentation project using Nextra for documentation
+|   |   |-- pages/ : Documentation pages
+|   |-- mobile/ : Mobile app project (React Native)
+|   |   |-- components/ : Reusable UI components (e.g., HelloWave.tsx)
+|   |-- supabase/ : Supabase backend functions and configuration
+|   |   |-- functions/ : Database triggers and API functions
+|-- packages/
+|   |-- eslint-config/ : Configuration for ESLint
+|   |-- schema/ : Database schema definitions and related files
+|   |-- shared-types/ : Types shared between different parts of the project
+|   |-- typescript-config/ : Base TypeScript configuration
 ```
 
 ## Getting Started
+
+### Installing Dependencies & First Time Setup
 
 1. Install the package manager, yarn (must be version 1)
 
@@ -51,66 +51,70 @@ yarn install
 3. Install [Docker Desktop](https://www.docker.com/products/docker-desktop/) to host the server edge functions
 
    - If you're running this project on WSL, please instead install [Docker on Linux](https://docs.docker.com/desktop/setup/install/linux/) and follow the [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/).
-   - Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
+   - (on Windows only) Ensure that you enable `Expose daemon on tcp://localhost:2375 without TLS` inside `settings->general` in Docker Desktop
 
 4. To test server functions, download [Postman](https://www.postman.com/)
 
-5. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
+   - Recommended, but not necessary
 
-6. Make a [Supabase](https://supabase.com) account
+6. Make a [Supabase](https://supabase.com) account and project
 
-   - Get your connection string by clicking the connect button at the top of the page and copying the `transaction pooler` string
-   - Add your connection string and password into the env files inside `packages/schema` and `supabase/functions`
-   - Make sure that the .env inside `packages/schema` and `apps/supabase/functions` are identical
    - Turn off email authentication: Authentication -> Sign In / Up -> Email -> Confirm email.
 
 7. Download the [Supabase CLI](https://supabase.com/docs/guides/local-development/cli/getting-started?queryGroups=platform&platform=windows&queryGroups=access-method&access-method=kong)
 
    - If you are using Windows, install Supabase using [Scoop](https://scoop.sh/)
 
-8. Make a [ngrok](https://dashboard.ngrok.com/) account
+8. Make a [ngrok](https://dashboard.ngrok.com/) account and download the CLI. 
 
    - Run `ngrok config add-authtoken <tokenFromAccount>`
 
 9. Start ngrok with `ngrok http 54321`
 
-   - Copy the forwarded address ngrok gives you into `apps/mobile/.env`'s `EXPO_PUBLIC_SUPABASE_API_URL` entry. Append `/functions/v1/` to the end.
-   - Ex: `EXPO_PUBLIC_SUPABASE_API_URL=https://8165-128-227-1-18.ngrok-free.app/functions/v1/`
+10. Create env files by copying the .env.example files inside `packages/schema`, `apps/supabase/functions`, and `apps/mobile` and renaming the copies to `.env`
 
-10. Start the program by running:
+    - Follow the steps in each ```.env.example``` to fill out each required key.
+
+### Running App
+
+Every time you run the app, you will need to run some of the following commands.
+
+*Pushing to Database*: You will need to push your Database tables to supabase by running:
+
+```
+yarn run db:push
+```
+
+If this doesn't work, try resetting your database password in Supabase: 
+   - Project Settings -> database -> reset password
+
+*Running Ngrok*
+
+If you don't have ngrok open, run it with:
+
+```ngrok http 54321```
+
+Copy the forwarded url and paste it into `apps/mobile/.env` as the .env.example says. (Don't forget the `/functions/v1` at the end)
+
+*Running the App*: You may run the frontend and backend either together:
 
 ```
 yarn run dev
 ```
 
-You can also run each package separately with the following commands:
+or separately:
 
-- To run the docs project:
+```
+yarn run dev:mobile
+yarn run dev:supabase
+```
 
-  ```
-  yarn run dev:docs
-  ```
-
-- To run the mobile app:
-
-  ```
-  yarn run dev:mobile
-  ```
-
-- To run the supabase server:
-  ```
-  yarn run dev:supabase
-  ```
+It's recommended you do it separately if you're working on the backend and will need to restart your supabase edge functions frequently, otherwise together is perfectly fine.
 
 ## Troubleshooting
 
 - `ngrok tunnel took too long to connect`
   - Try disabling the windows firewall
-
-## Adding to the documentation
-
-Edit Markdown files in the `apps/content/` directory. Your changes will be
-live-reloaded by Nextra.
 
 ## Code Formatting & Linting
 
