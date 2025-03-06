@@ -1,0 +1,21 @@
+// According to Turborepo's best practices, should 
+// Super hacky, will investigate more later!
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/shared-types": ["packages/shared-types"],
+      "@repo/shared-types/*": ["packages/shared-types/*"]
+    },
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true
+  },
+  "references": [
+    { "path": "packages/shared-types" }
+  ],
+  "files": [],
+  "exclude": ["**/node_modules", "**/dist"]
+}
