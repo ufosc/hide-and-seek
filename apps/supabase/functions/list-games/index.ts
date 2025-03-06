@@ -1,7 +1,7 @@
-import { games, GamesSchema } from "@repo/schema";
+import { games, } from "@repo/schema";
+import { GamesSchema } from "@repo/shared-types/games.api.ts"
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { z } from "zod";
 import "jsr:@supabase/functions-js/edge-runtime.d.ts"; // Supabase Edge Runtime types
 import "jsr:@std/dotenv/load";
 

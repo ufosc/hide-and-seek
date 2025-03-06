@@ -3,6 +3,7 @@ import * as z from "zod";
 const envSchema = z.object({
   EXPO_PUBLIC_SUPABASE_URL: z.string(),
   EXPO_PUBLIC_SUPABASE_ANON_KEY: z.string(),
+  EXPO_PUBLIC_SUPABASE_API_ANON_KEY: z.string(),
   EXPO_PUBLIC_SUPABASE_API_URL: z.string(),
 });
 

@@ -7,8 +7,8 @@ dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 console.log("Loaded ENV:", process.env.EXPO_PUBLIC_SUPABASE_URL);
 
 export default defineConfig({
-  schema: "./src/game.ts",
-  out: "./drizzle",
+  schema: "./src/schema.ts",
+  out: "./drizzle", // Migrations will be generated in packages/schema/drizzle
   dialect: "postgresql",
   dbCredentials: {
     url: process.env.DATABASE_URL!,

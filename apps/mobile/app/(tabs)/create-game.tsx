@@ -9,7 +9,11 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native";
-import { CreateGameInput, CreateGameSchema } from "@repo/schema/src/game";
+
+import {
+  CreateGameInput,
+  CreateGameSchema,
+} from "@repo/shared-types/games.api";
 
 const CreateGameForm = () => {
   const [title, setTitle] = useState("");
@@ -23,7 +27,7 @@ const CreateGameForm = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_ANON_KEY}`,
+            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_API_ANON_KEY}`,
             // Add any necessary authorization headers here
           },
           body: JSON.stringify({ title, description } as CreateGameInput),

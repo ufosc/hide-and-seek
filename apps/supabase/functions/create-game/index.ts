@@ -1,10 +1,13 @@
 import {
   games,
+} from "@repo/schema";
+import {
   CreateGameSchema,
   CreateGameInput,
   Game,
   GameSchema,
-} from "@repo/schema";
+} from "@repo/shared-types/games.api.ts";
+
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { z } from "zod";
@@ -37,11 +40,7 @@ Deno.serve(async (req) => {
     // 2. Insert into the 'games' table using Drizzle, using 'games' (table definition)
     const newGameResult = await db
       .insert(games) // Use 'games' here (Drizzle table)
-      .values({
-        title: parsedInput.title,
-        description: parsedInput.description,
-        metadata: parsedInput.metadata, // Assuming metadata is handled correctly
-      })
+      .values(parsedInput)
       .returning();
 
     const newGame = newGameResult[0];
