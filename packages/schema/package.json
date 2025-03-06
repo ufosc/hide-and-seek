@@ -2,7 +2,15 @@
   "name": "@repo/schema",
   "version": "1.0.0",
   "license": "MIT",
+  "description": "Database schema definitions",
+  "private": true,
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/schema.ts",
+      "import": "./src/schema.ts"
+    }
+  },
   "dependencies": {
     "@types/node": "^22.13.4",
     "drizzle-kit": "^0.30.4",

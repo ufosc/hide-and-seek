@@ -4,13 +4,8 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-
-const queryClient = new QueryClient();
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TRPCProvider } from "@/lib/trpc";
 
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -57,7 +52,7 @@ export default function RootLayout() {
   }
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <TRPCProvider>
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -66,6 +61,6 @@ export default function RootLayout() {
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
-    </QueryClientProvider>
+    </TRPCProvider>
   );
 }

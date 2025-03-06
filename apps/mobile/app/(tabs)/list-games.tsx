@@ -1,4 +1,3 @@
-import { env } from "@/lib/env";
 import React from "react";
 import {
   View,
@@ -8,9 +7,7 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import { useQuery } from "@tanstack/react-query";
-
-import { Games } from "@repo/shared-types/games.api";
+import { api } from "@/lib/trpc";
 
 const ListGames = () => {
   const {
@@ -18,30 +15,7 @@ const ListGames = () => {
     isError,
     data: games,
     error,
-  } = useQuery<Games, Error>({
-    queryKey: ["games"],
-    queryFn: async () => {
-      const response = await fetch(
-        `${env.EXPO_PUBLIC_SUPABASE_API_URL}list-games`,
-        {
-          headers: {
-            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_API_ANON_KEY}`,
-            // Add any necessary authorization headers here
-          },
-        }
-      );
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          `Failed to fetch games: ${response.status} - ${
-            errorData.error || JSON.stringify(errorData)
-          }`
-        );
-      }
-      return response.json() as Promise<Games>;
-    },
-  });
+  } = api.game.list.useQuery();
 
   if (isLoading) {
     return (

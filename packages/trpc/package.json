@@ -1,0 +1,17 @@
+{
+  "name": "@repo/trpc",
+  "version": "0.1.0",
+  "description": "tRPC API layer",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@repo/schema": "*",
+    "@repo/shared-types": "*",
+    "@trpc/server": "^11.0.0-next-beta.113",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}

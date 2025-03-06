@@ -1,0 +1,13 @@
+{
+  "imports": {
+    "@repo/schema": "../../../../packages/schema/src/schema.ts",
+    "@repo/shared-types/": "../../../../packages/shared-types/",
+    "@repo/trpc": "../../../../packages/trpc/index.ts",
+    "@repo/trpc/": "../../../../packages/trpc/",
+    "@trpc/server": "npm:/@trpc/server",
+    "@trpc/server/": "npm:/@trpc/server/",
+    "drizzle-orm/": "npm:/drizzle-orm/",
+    "postgres": "npm:postgres",
+    "zod": "npm:zod"
+  }
+}

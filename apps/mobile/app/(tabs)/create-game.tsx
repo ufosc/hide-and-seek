@@ -1,4 +1,3 @@
-import { env } from "@/lib/env";
 import React, { useState } from "react";
 import {
   View,
@@ -9,52 +8,35 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native";
-
-import {
-  CreateGameInput,
-  CreateGameSchema,
-} from "@repo/shared-types/games.api";
+import { api } from "@/lib/trpc";
+import { CreateGameInput } from "@repo/shared-types/games.api";
 
 const CreateGameForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  const handleSubmit = async () => {
-    try {
-      const response = await fetch(
-        `${env.EXPO_PUBLIC_SUPABASE_API_URL}create-game`, // Replace with your actual Supabase function URL
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${env.EXPO_PUBLIC_SUPABASE_API_ANON_KEY}`,
-            // Add any necessary authorization headers here
-          },
-          body: JSON.stringify({ title, description } as CreateGameInput),
-        }
-      );
-      console.log({ title, description });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(
-          `Failed to create game: ${response.status} - ${
-            errorData.error || JSON.stringify(errorData)
-          }`
-        );
-      }
-
-      const newGame = await response.json();
+  const createGameMutation = api.game.create.useMutation({
+    onSuccess: (data) => {
       Alert.alert(
         "Game Created",
-        `Successfully created game with id: ${newGame.id}`
+        `Successfully created game with id: ${data.id}`
       );
       setTitle("");
       setDescription("");
-    } catch (error) {
+    },
+    onError: (error) => {
       Alert.alert("Error", error.message);
-      console.log(error.message);
-    }
+      console.error(error);
+    },
+  });
+
+  const handleSubmit = () => {
+    const input: CreateGameInput = {
+      title,
+      description: description || null,
+    };
+    
+    createGameMutation.mutate(input);
   };
 
   return (
@@ -72,7 +54,11 @@ const CreateGameForm = () => {
         value={description}
         onChangeText={setDescription}
       />
-      <Button title="Create Game" onPress={handleSubmit} />
+      <Button 
+        title={createGameMutation.isPending ? "Creating..." : "Create Game"} 
+        onPress={handleSubmit}
+        disabled={createGameMutation.isPending} 
+      />
     </SafeAreaView>
   );
 };
