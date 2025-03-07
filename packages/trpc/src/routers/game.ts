@@ -29,7 +29,15 @@ export const gameRouter = router({
       }
 
       try {
-        // Insert the new game into the database
+        // Validate boundary has at least 3 points
+        if (input.boundary.length < 3) {
+          throw new TRPCError({
+            code: "BAD_REQUEST",
+            message: "Game boundary must have at least 3 points",
+          });
+        }
+
+        // Insert the new game into the database with boundary
         const [insertedGame] = await ctx.db
           .insert(games)
           .values({
@@ -37,6 +45,7 @@ export const gameRouter = router({
             description: input.description,
             creator_id: input.creator_id,
             status: "waiting",
+            boundary: input.boundary,
           })
           .returning();
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -7,17 +7,22 @@ import {
   ActivityIndicator,
   Alert,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { api } from "@/lib/trpc";
 import { useAuthStore } from "@/store/authStore";
 import { Button } from "@/components/ui/button";
+import MapComponent from "@/components/MapComponent";
+import useMapStore from "@/store/mapStore";
 
 export default function GameLobbyScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const gameId = parseInt(id || "0");
   const user = useAuthStore((state) => state.user);
   const router = useRouter();
+
+  const setPolygons = useMapStore((state) => state.setPolygons);
 
   // Get game details
   const {
@@ -33,6 +38,20 @@ export default function GameLobbyScreen() {
     refetch: refetchParticipants,
     error: participantsError,
   } = api.game.getParticipants.useQuery({ game_id: gameId });
+
+  // When game data loads, set the boundary on the map
+  useEffect(() => {
+    if (game && game.boundary) {
+      setPolygons([
+        {
+          coordinates: game.boundary,
+          fillColor: "rgba(0, 150, 255, 0.2)",
+          strokeColor: "#0096ff",
+          strokeWidth: 2,
+        },
+      ]);
+    }
+  }, [game, setPolygons]);
 
   // Start game mutation
   const startGameMutation = api.game.updateStatus.useMutation({
@@ -141,6 +160,12 @@ export default function GameLobbyScreen() {
         </Text>
       </View>
 
+      {/* Game boundary map */}
+      <View style={styles.mapContainer}>
+        <Text style={styles.mapTitle}>Game Boundary</Text>
+        <MapComponent />
+      </View>
+
       <View style={styles.participantsContainer}>
         <Text style={styles.sectionTitle}>Participants</Text>
         <Button onPress={() => refetchParticipants()}>
@@ -242,6 +267,25 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginTop: 10,
     color: "#0066cc",
+  },
+  mapContainer: {
+    height: Dimensions.get("window").height * 0.25,
+    marginBottom: 15,
+    borderRadius: 8,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#ddd",
+  },
+  mapTitle: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    zIndex: 1,
+    backgroundColor: "rgba(255,255,255,0.7)",
+    padding: 5,
+    borderRadius: 5,
+    fontSize: 14,
+    fontWeight: "500",
   },
   participantsContainer: {
     flex: 1,

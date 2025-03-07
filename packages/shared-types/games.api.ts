@@ -1,4 +1,5 @@
 import z from "zod";
+import { LatLng } from "react-native-maps";
 
 // Game status enum
 export const GameStatusEnum = z.enum(["waiting", "started", "completed"]);
@@ -8,6 +9,17 @@ export type GameStatus = z.infer<typeof GameStatusEnum>;
 export const ParticipantRoleEnum = z.enum(["seeker", "hider"]);
 export type ParticipantRole = z.infer<typeof ParticipantRoleEnum>;
 
+// Define LatLng schema for validation
+const LatLngSchema = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+});
+
+// Create a boundary schema - array of points with minimum 3 points
+const BoundarySchema = z
+  .array(LatLngSchema)
+  .min(3, "Boundary must have at least 3 points");
+
 // Zod schema for CREATING a new game (input validation)
 export const CreateGameSchema = z.object({
   title: z
@@ -16,6 +28,7 @@ export const CreateGameSchema = z.object({
     .max(100, "Title must be between 3 and 100 characters"),
   description: z.string().max(500).nullish(), // Optional description
   creator_id: z.string(), // Auth ID of the user creating the game
+  boundary: BoundarySchema, // Required game boundary
 });
 
 export type CreateGameInput = z.infer<typeof CreateGameSchema>;

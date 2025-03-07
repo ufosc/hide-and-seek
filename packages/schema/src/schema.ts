@@ -8,6 +8,7 @@ export const games = pgTable("games", {
   description: text("description"),
   status: text("status").notNull().default("waiting"), // Added status: waiting, started, completed (enum is defined in shared-types/games.api.ts for now)
   creator_id: text("creator_id").notNull(), // Reference to auth_id in users table
+  boundary: jsonb("boundary"), // Store boundary polygon as JSON
 });
 
 // Add users table definition
