@@ -7,3 +7,12 @@ export const games = pgTable("games", {
   createdAt: timestamp("created_at").defaultNow(),
   description: text("description"),
 });
+
+// Add users table definition
+export const users = pgTable("users", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  auth_id: text("auth_id").notNull().unique(),
+  createdAt: timestamp("created_at").defaultNow(),
+});
