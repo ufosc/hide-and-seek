@@ -3,26 +3,30 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   StyleSheet,
   Alert,
   SafeAreaView,
 } from "react-native";
 import { api } from "@/lib/trpc";
 import { CreateGameInput } from "@repo/shared-types/games.api";
+import { useAuthStore } from "@/store/authStore";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "expo-router";
 
 const CreateGameForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const user = useAuthStore((state) => state.user);
+  const router = useRouter();
 
   const createGameMutation = api.game.create.useMutation({
     onSuccess: (data) => {
-      Alert.alert(
-        "Game Created",
-        `Successfully created game with id: ${data.id}`,
-      );
+      Alert.alert("Game Created", `Successfully created game: ${data.title}`);
       setTitle("");
       setDescription("");
+
+      // Navigate to the game lobby
+      router.push(`/game-lobby/${data.id}`);
     },
     onError: (error) => {
       Alert.alert("Error", error.message);
@@ -31,9 +35,15 @@ const CreateGameForm = () => {
   });
 
   const handleSubmit = () => {
+    if (!user) {
+      Alert.alert("Error", "You must be logged in to create a game");
+      return;
+    }
+
     const input: CreateGameInput = {
       title,
       description: description || null,
+      creator_id: user.id, // Use the authenticated user's ID
     };
 
     createGameMutation.mutate(input);
@@ -55,10 +65,13 @@ const CreateGameForm = () => {
         onChangeText={setDescription}
       />
       <Button
-        title={createGameMutation.isPending ? "Creating..." : "Create Game"}
+        disabled={createGameMutation.isPending || !title || title.length < 3}
         onPress={handleSubmit}
-        disabled={createGameMutation.isPending}
-      />
+      >
+        <Text>
+          {createGameMutation.isPending ? "Creating..." : "Create Game"}
+        </Text>
+      </Button>
     </SafeAreaView>
   );
 };
