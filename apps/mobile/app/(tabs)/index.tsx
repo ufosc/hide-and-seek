@@ -7,7 +7,7 @@ import {
   MapPolygon,
   MapCircle,
   MapRegion,
-} from "@repo/shared-types/mapTypes";
+} from "@repo/shared-types/maps";
 
 const GameMapScreen: React.FC = () => {
   // Type GameMapScreen as a functional component
@@ -20,43 +20,43 @@ const GameMapScreen: React.FC = () => {
   const startDrawingPolygon = useMapStore((state) => state.startDrawingPolygon);
   const stopDrawingPolygon = useMapStore((state) => state.stopDrawingPolygon);
   const addCoordinateToPolygonDraft = useMapStore(
-    (state) => state.addCoordinateToPolygonDraft,
+    (state) => state.addCoordinateToPolygonDraft
   );
 
   const removeLastCoordinateFromPolygonDraft = useMapStore(
-    (state) => state.removeLastCoordinateFromPolygonDraft,
+    (state) => state.removeLastCoordinateFromPolygonDraft
   );
   const clearPolygonDraft = useMapStore((state) => state.clearPolygonDraft);
   const setFinalPolygon = useMapStore((state) => state.setFinalPolygon);
   const polygonDraftCoordinates = useMapStore(
-    (state) => state.polygonDraftCoordinates,
+    (state) => state.polygonDraftCoordinates
   );
 
   useEffect(() => {
     // Filled with hard coded defaults for now
     const initialMarkers: MapMarker[] = [
-      // Type the array of markers
-      {
-        coordinate: { latitude: 29.643946, longitude: -82.355659 },
-        title: "Marker 1",
-        description: "This is UF Campus",
-      },
+      // // Type the array of markers
+      // {
+      //   coordinate: { latitude: 29.643946, longitude: -82.355659 },
+      //   title: "Marker 1",
+      //   description: "This is UF Campus",
+      // },
     ];
     setMarkers(initialMarkers);
 
     const initialPolygons: MapPolygon[] = [
       // Type the array of polygons
-      { coordinates: [], fillColor: "rgba(100,200,200,0.3)" }, // Replace with actual coordinates
+      // { coordinates: [], fillColor: "rgba(100,200,200,0.3)" }, // Replace with actual coordinates
     ];
     setPolygons(initialPolygons);
 
     const initialCircles: MapCircle[] = [
       // Type the array of circles
-      {
-        center: { latitude: 37.78825, longitude: -122.4324 },
-        radius: 500,
-        fillColor: "rgba(200,100,100,0.3)",
-      },
+      // {
+      //   center: { latitude: 37.78825, longitude: -122.4324 },
+      //   radius: 500,
+      //   fillColor: "rgba(200,100,100,0.3)",
+      // },
     ];
     setCircles(initialCircles);
 
