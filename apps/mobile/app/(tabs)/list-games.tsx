@@ -6,17 +6,30 @@ import {
   SafeAreaView,
   FlatList,
   ActivityIndicator,
+  Alert,
+  Button
 } from "react-native";
 import { api } from "@/lib/trpc";
 
+
+
 const ListGames = () => {
-  const { isLoading, isError, data: games, error } = api.game.list.useQuery();
+  const { isLoading, isError, data: games, error, refetch ,isRefetching } = api.game.list.useQuery();
 
   if (isLoading) {
     return (
       <SafeAreaView style={styles.container}>
         <ActivityIndicator size="large" color="#0000ff" />
         <Text style={styles.loadingText}>Loading games...</Text>
+      </SafeAreaView>
+    );
+  }
+
+  if(isRefetching){
+    return (
+      <SafeAreaView style={styles.container}>
+        <ActivityIndicator size="large" color="#0000ff" />
+        <Text style={styles.loadingText}>Reloading games...</Text>
       </SafeAreaView>
     );
   }
@@ -47,7 +60,16 @@ const ListGames = () => {
       ) : (
         <Text>No games available.</Text>
       )}
+
+      <Button  
+        onPress={ () => refetch() }
+        title = "Reload"
+        
+      />
+
     </SafeAreaView>
+
+    
   );
 };
 
@@ -88,6 +110,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "gray",
   },
+  Button:{
+
+  }
 });
 
 export default ListGames;
