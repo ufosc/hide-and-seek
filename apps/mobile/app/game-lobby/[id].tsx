@@ -70,6 +70,7 @@ export default function GameLobbyScreen() {
   const deleteGameMutation = api.game.delete.useMutation({
     onSuccess: () => {
       Alert.alert("Game Deleted", "The game has been deleted successfully.");
+      setPolygons([]); // reset boundary;
       // Navigate back to games list
       router.replace("/(tabs)/list-games");
     },

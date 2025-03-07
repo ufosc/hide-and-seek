@@ -1,5 +1,4 @@
 import z from "zod";
-import { LatLng } from "react-native-maps";
 
 // Game status enum
 export const GameStatusEnum = z.enum(["waiting", "started", "completed"]);
