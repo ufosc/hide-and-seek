@@ -4,7 +4,9 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
   "include": ["src/**/*.ts", "index.ts"]
 }
