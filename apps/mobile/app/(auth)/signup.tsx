@@ -5,6 +5,7 @@ import { useAuthStore } from "@/store/authStore";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const { signUpWithEmail, isLoading } = useAuthStore();
@@ -15,10 +16,25 @@ export default function SignUpPage() {
       if (!isLoading) {
         router.replace("/(tabs)");
       }
+      /*if(isUserEmpty(username))
+      {
+         Alert.alert("Sign-up Error", "No User Entered.");
+      }
+      else
+      {
+        throw new TypeError("No User Entered.");
+      }*/
     } catch (error: any) {
       Alert.alert("Sign-up Error", error.message);
     }
   }
+
+  // This checks if the user field is empty
+  function isUserEmpty(username) : boolean
+  {
+      return !(username.trim == "" || username == null || username == undefined);
+  }
+  
 
   return (
     <View className="flex-1 bg-gray-900 justify-between px-5 pb-10 pt-20">
@@ -36,6 +52,13 @@ export default function SignUpPage() {
               keyboardType="email-address"
               onChangeText={setEmail}
               value={email}
+            />
+            <TextInput
+              className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
+              placeholder="Username"
+              placeholderTextColor="#A3A3A3"
+              onChangeText={setUsername}
+              value={username}
             />
             <TextInput
               className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
