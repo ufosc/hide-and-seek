@@ -11,7 +11,7 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
-import "~/global.css";
+import "@/global.css";
 
 const queryClient = new QueryClient();
 

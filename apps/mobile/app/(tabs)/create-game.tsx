@@ -3,11 +3,9 @@ import {
   View,
   Text,
   TextInput,
-  StyleSheet,
   Alert,
   SafeAreaView,
   ActivityIndicator,
-  TouchableOpacity,
   Dimensions,
 } from "react-native";
 import { api } from "@/lib/trpc";
@@ -17,7 +15,6 @@ import Button from "@/components/ui/button";
 import { useRouter } from "expo-router";
 import MapComponent from "@/components/MapComponent";
 import useMapStore from "@/store/mapStore";
-import { LatLng } from "react-native-maps";
 
 // Steps in the game creation process
 enum CreateGameStep {
@@ -167,9 +164,9 @@ const CreateGameForm = () => {
   // Show loading state while checking if user has games
   if (isCheckingGames) {
     return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" color="#0000ff" />
-        <Text style={styles.loadingText}>Checking existing games...</Text>
+      <SafeAreaView className="flex-1 p-5">
+        <ActivityIndicator size="large" color="#0f6ef7" />
+        <Text className="mt-2.5 text-center">Checking existing games...</Text>
       </SafeAreaView>
     );
   }
@@ -177,25 +174,30 @@ const CreateGameForm = () => {
   // If user already has a game, show message and option to view it
   if (hasExistingGame) {
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.existingGameContainer}>
-          <Text style={styles.warningTitle}>You Already Have a Game</Text>
-          <Text style={styles.warningText}>
+      <SafeAreaView className="flex-1 p-5">
+        <View className="flex-1 justify-center items-center p-5">
+          <Text className="text-2xl font-bold text-danger mb-2.5 text-center">
+            You Already Have a Game
+          </Text>
+          <Text className="text-base text-center mb-5 text-gray-800">
             You can only have one active game at a time. Please continue with
             your existing game or delete it to create a new one.
           </Text>
-          <View style={styles.gameInfo}>
-            <Text style={styles.gameTitle}>{userGames[0].title}</Text>
-            <Text style={styles.gameStatus}>
+          <View className="bg-gray-100 border-2 border-primary rounded p-4 w-full items-center mb-5">
+            <Text className="text-lg font-bold">{userGames[0].title}</Text>
+            <Text className="text-primary mt-1">
               Status: {userGames[0].status.toUpperCase()}
             </Text>
           </View>
-          <Button onPress={handleViewExistingGame} style={styles.viewButton}>
+          <Button
+            onPress={handleViewExistingGame}
+            className="w-full mb-2.5 bg-primary"
+          >
             Continue to Your Game
           </Button>
           <Button
             onPress={() => router.push("/(tabs)/list-games")}
-            style={styles.listButton}
+            className="w-full bg-secondary"
           >
             Go to Games List
           </Button>
@@ -207,33 +209,35 @@ const CreateGameForm = () => {
   // STEP 1: Boundary Setup Screen
   if (currentStep === CreateGameStep.SETUP_BOUNDARY) {
     return (
-      <SafeAreaView style={styles.container}>
-        <Text style={styles.title}>Step 1: Set Game Boundary</Text>
-        <Text style={styles.instructions}>
+      <SafeAreaView className="flex-1 p-5">
+        <Text className="text-2xl font-bold mb-2.5 text-center">
+          Step 1: Set Game Boundary
+        </Text>
+        <Text className="text-center mb-4 text-gray-600">
           Tap on the map to create boundary points. You need at least 3 points
           to form a valid boundary.
         </Text>
 
-        <View style={styles.mapContainer}>
+        <View
+          className="h-[50vh] rounded-lg overflow-hidden border border-gray-300 mb-4"
+          style={{ height: Dimensions.get("window").height * 0.5 }}
+        >
           <MapComponent onPress={handleMapPress} />
         </View>
 
-        <View style={styles.pointsInfo}>
-          <Text style={styles.pointsCount}>
+        <View className="items-center mb-4">
+          <Text className="text-base font-bold text-primary">
             Points: {polygonDraftCoordinates.length}/3 minimum
           </Text>
         </View>
 
-        <View style={styles.buttonRow}>
-          <Button
-            onPress={() => clearPolygonDraft()}
-            style={styles.clearButton}
-          >
+        <View className="flex-row justify-between mb-4">
+          <Button onPress={() => clearPolygonDraft()} className="flex-1 mr-1">
             Clear All Points
           </Button>
           <Button
             onPress={() => removeLastCoordinateFromPolygonDraft()}
-            style={styles.undoButton}
+            className="flex-1 ml-1"
           >
             Remove Last Point
           </Button>
@@ -242,10 +246,9 @@ const CreateGameForm = () => {
         <Button
           disabled={polygonDraftCoordinates.length < 3}
           onPress={nextStep}
-          style={[
-            styles.nextButton,
-            polygonDraftCoordinates.length < 3 ? styles.disabledButton : null,
-          ]}
+          className={`bg-success ${
+            polygonDraftCoordinates.length < 3 ? "opacity-50" : ""
+          }`}
         >
           Next: Add Game Details
         </Button>
@@ -255,40 +258,47 @@ const CreateGameForm = () => {
 
   // STEP 2: Game Details Screen
   return (
-    <SafeAreaView style={styles.container}>
-      <Text style={styles.title}>Step 2: Game Details</Text>
+    <SafeAreaView className="flex-1 p-5">
+      <Text className="text-2xl font-bold mb-2.5 text-center">
+        Step 2: Game Details
+      </Text>
 
-      <View style={styles.boundaryInfo}>
-        <Text style={styles.boundaryTitle}>
+      <View className="bg-blue-100 p-2.5 rounded mb-4">
+        <Text className="text-primary font-medium">
           ✓ Boundary set: {polygonDraftCoordinates.length} points
         </Text>
       </View>
 
       <TextInput
-        style={styles.input}
+        className="border border-gray-300 p-3 mb-4 rounded text-base"
         placeholder="Game Title"
         value={title}
         onChangeText={setTitle}
       />
 
       <TextInput
-        style={[styles.input, styles.textArea]}
+        className="border border-gray-300 p-3 mb-4 rounded text-base h-[100px]"
         placeholder="Game Description (optional)"
         value={description}
         onChangeText={setDescription}
         multiline={true}
         numberOfLines={4}
+        textAlignVertical="top"
       />
 
-      <View style={styles.buttonRow}>
-        <Button onPress={prevStep} style={styles.backButton}>
+      <View className="flex-row justify-between mb-4">
+        <Button onPress={prevStep} className="flex-1 mr-1 bg-secondary">
           Back to Boundary
         </Button>
 
         <Button
           disabled={createGameMutation.isPending || !title || title.length < 3}
           onPress={handleSubmit}
-          style={styles.createButton}
+          className={`flex-1 ml-1 bg-success ${
+            createGameMutation.isPending || !title || title.length < 3
+              ? "opacity-50"
+              : ""
+          }`}
         >
           {createGameMutation.isPending ? "Creating..." : "Create Game"}
         </Button>
@@ -296,142 +306,5 @@ const CreateGameForm = () => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  instructions: {
-    textAlign: "center",
-    marginBottom: 15,
-    color: "#555",
-  },
-  mapContainer: {
-    height: Dimensions.get("window").height * 0.5,
-    borderRadius: 10,
-    overflow: "hidden",
-    borderWidth: 1,
-    borderColor: "#ccc",
-    marginBottom: 15,
-  },
-  pointsInfo: {
-    alignItems: "center",
-    marginBottom: 15,
-  },
-  pointsCount: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#007bff",
-  },
-  buttonRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 15,
-  },
-  clearButton: {
-    flex: 1,
-    marginRight: 5,
-    backgroundColor: "#dc3545",
-  },
-  undoButton: {
-    flex: 1,
-    marginLeft: 5,
-    backgroundColor: "#6c757d",
-  },
-  nextButton: {
-    backgroundColor: "#28a745",
-  },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    padding: 12,
-    marginBottom: 15,
-    borderRadius: 5,
-    fontSize: 16,
-  },
-  textArea: {
-    height: 100,
-    textAlignVertical: "top",
-  },
-  boundaryInfo: {
-    backgroundColor: "#e8f4f8",
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-  boundaryTitle: {
-    color: "#0066cc",
-    fontWeight: "500",
-  },
-  backButton: {
-    flex: 1,
-    marginRight: 5,
-    backgroundColor: "#6c757d",
-  },
-  createButton: {
-    flex: 1,
-    marginLeft: 5,
-    backgroundColor: "#28a745",
-  },
-  loadingText: {
-    marginTop: 10,
-    textAlign: "center",
-  },
-  existingGameContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  warningTitle: {
-    fontSize: 22,
-    fontWeight: "bold",
-    color: "#d9534f",
-    marginBottom: 10,
-    textAlign: "center",
-  },
-  warningText: {
-    fontSize: 16,
-    textAlign: "center",
-    marginBottom: 20,
-    color: "#333",
-  },
-  gameInfo: {
-    backgroundColor: "#f8f9fa",
-    borderColor: "#007bff",
-    borderWidth: 2,
-    borderRadius: 5,
-    padding: 15,
-    width: "100%",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  gameTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  gameStatus: {
-    color: "#007bff",
-    marginTop: 5,
-  },
-  viewButton: {
-    marginBottom: 10,
-    width: "100%",
-  },
-  listButton: {
-    width: "100%",
-    backgroundColor: "#6c757d",
-  },
-});
 
 export default CreateGameForm;

@@ -11,9 +11,10 @@ const Button: React.FC<ButtonProps> = ({
   className = "",
   ...props
 }) => {
+  const hasBackgroundColor = className.includes("bg-");
   return (
     <Pressable
-      className={`rounded-lg bg-gray-800 px-4 py-4 ${props.disabled ? "opacity-50" : ""} ${className}`}
+      className={`rounded-lg px-4 py-4 ${props.disabled ? "opacity-80" : ""} ${!hasBackgroundColor ? "bg-secondary" : ""} ${className}`}
       {...props}
     >
       {typeof children === "string" ? (
