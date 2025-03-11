@@ -5,14 +5,8 @@
     "paths": {
       "@/*": ["./src/*"]
     },
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "declaration": true,
-    "allowImportingTsExtensions": true
+    "allowImportingTsExtensions": true,
+    "noEmit": true
   },
-  "include": ["src/**/*.ts", "index.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*.ts", "index.ts"]
 }

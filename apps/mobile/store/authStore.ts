@@ -3,6 +3,7 @@ import { Session } from "@supabase/supabase-js";
 import { supabase } from "@/lib/supabase";
 import { persist, createJSONStorage } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { trpcClient } from "@/lib/trpc";
 
 interface AuthState {
   session: Session | null;
@@ -45,22 +46,46 @@ export const useAuthStore = create<AuthState>()(
       },
       signUpWithEmail: async (email: string, password: string) => {
         set({ isLoading: true });
-        const { error } = await supabase.auth.signUp({
-          email: email,
-          password: password,
-        });
+        try {
+          // Step 1: Register with Supabase Auth
+          const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+          });
 
-        if (error) {
+          console.log(data);
+
+          if (error) {
+            throw error;
+          }
+
+          if (data?.user) {
+            // Step 2: Create user in database using tRPC
+            try {
+              trpcClient.user.create.mutate({
+                name: "Place D. Holder", // Can you tell I've been reading one piece lol
+                email: email,
+                auth_id: data.user.id,
+              });
+              console.log("User created in database");
+            } catch (dbError: any) {
+              console.error(
+                "Error creating user in database:",
+                dbError.message
+              );
+            }
+          }
+        } catch (error) {
+          console.error("SignUp error:", error);
           throw error;
-        } else {
-          console.log("Check your email for verification!");
+        } finally {
+          set({ isLoading: false });
         }
-        set({ isLoading: false });
       },
     }),
     {
       name: "auth-storage",
       storage: createJSONStorage(() => AsyncStorage),
-    },
-  ),
+    }
+  )
 );

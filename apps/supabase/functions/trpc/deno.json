@@ -7,6 +7,8 @@
     "@trpc/server": "npm:/@trpc/server",
     "@trpc/server/": "npm:/@trpc/server/",
     "drizzle-orm/": "npm:/drizzle-orm/",
+    "drizzle-orm": "npm:/drizzle-orm",
+    "react-native-maps": "npm:/react-native-maps",
     "postgres": "npm:postgres",
     "zod": "npm:zod"
   }

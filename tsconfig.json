@@ -1,0 +1,12 @@
+// According to Turborepo's best practices, should 
+// Super hacky, will investigate more later!
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@repo/*": ["packages/*"]
+    },
+    "moduleResolution": "bundler"
+  },
+  "exclude": ["**/node_modules", "**/dist"]
+}

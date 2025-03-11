@@ -23,7 +23,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
   const onMapReadyHandler = useMapStore((state) => state.onMapReadyHandler);
   const isDrawingPolygon = useMapStore((state) => state.isDrawingPolygon);
   const polygonDraftCoordinates = useMapStore(
-    (state) => state.polygonDraftCoordinates,
+    (state) => state.polygonDraftCoordinates
   );
 
   return (
