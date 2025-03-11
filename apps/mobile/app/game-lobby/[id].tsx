@@ -12,7 +12,8 @@ import {
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { api } from "@/lib/trpc";
 import { useAuthStore } from "@/store/authStore";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
+
 import MapComponent from "@/components/MapComponent";
 import useMapStore from "@/store/mapStore";
 

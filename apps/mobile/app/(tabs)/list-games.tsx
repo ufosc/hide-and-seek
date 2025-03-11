@@ -12,7 +12,7 @@ import {
 import { api } from "@/lib/trpc";
 import { useAuthStore } from "@/store/authStore";
 import { useRouter } from "expo-router";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import { GameStatus, Game } from "@repo/shared-types/games.api";
 
 const ListGames = () => {
@@ -248,9 +248,7 @@ const ListGames = () => {
       <SafeAreaView style={styles.container}>
         <Text style={styles.errorText}>Error loading games:</Text>
         <Text style={styles.errorText}>{error?.message}</Text>
-        <Button onPress={handleRefresh}>
-          <Text>Try Again</Text>
-        </Button>
+        <Button onPress={handleRefresh}>Try Again</Button>
       </SafeAreaView>
     );
   }

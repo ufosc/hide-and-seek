@@ -13,7 +13,7 @@ import {
 import { api } from "@/lib/trpc";
 import { CreateGameInput } from "@repo/shared-types/games.api";
 import { useAuthStore } from "@/store/authStore";
-import { Button } from "@/components/ui/button";
+import Button from "@/components/ui/button";
 import { useRouter } from "expo-router";
 import MapComponent from "@/components/MapComponent";
 import useMapStore from "@/store/mapStore";
@@ -191,13 +191,13 @@ const CreateGameForm = () => {
             </Text>
           </View>
           <Button onPress={handleViewExistingGame} style={styles.viewButton}>
-            <Text>Continue to Your Game</Text>
+            Continue to Your Game
           </Button>
           <Button
             onPress={() => router.push("/(tabs)/list-games")}
             style={styles.listButton}
           >
-            <Text>Go to Games List</Text>
+            Go to Games List
           </Button>
         </View>
       </SafeAreaView>
@@ -229,13 +229,13 @@ const CreateGameForm = () => {
             onPress={() => clearPolygonDraft()}
             style={styles.clearButton}
           >
-            <Text>Clear All Points</Text>
+            Clear All Points
           </Button>
           <Button
             onPress={() => removeLastCoordinateFromPolygonDraft()}
             style={styles.undoButton}
           >
-            <Text>Remove Last Point</Text>
+            Remove Last Point
           </Button>
         </View>
 
@@ -247,7 +247,7 @@ const CreateGameForm = () => {
             polygonDraftCoordinates.length < 3 ? styles.disabledButton : null,
           ]}
         >
-          <Text>Next: Add Game Details</Text>
+          Next: Add Game Details
         </Button>
       </SafeAreaView>
     );
@@ -282,7 +282,7 @@ const CreateGameForm = () => {
 
       <View style={styles.buttonRow}>
         <Button onPress={prevStep} style={styles.backButton}>
-          <Text>Back to Boundary</Text>
+          Back to Boundary
         </Button>
 
         <Button
@@ -290,9 +290,7 @@ const CreateGameForm = () => {
           onPress={handleSubmit}
           style={styles.createButton}
         >
-          <Text>
-            {createGameMutation.isPending ? "Creating..." : "Create Game"}
-          </Text>
+          {createGameMutation.isPending ? "Creating..." : "Create Game"}
         </Button>
       </View>
     </SafeAreaView>
