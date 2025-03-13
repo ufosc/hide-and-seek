@@ -166,7 +166,9 @@ const CreateGameForm = () => {
     return (
       <SafeAreaView className="flex-1 p-5">
         <ActivityIndicator size="large" color="#0f6ef7" />
-        <Text className="mt-2.5 text-center">Checking existing games...</Text>
+        <Text className="mt-2.5 text-center text-textPrimary">
+          Checking existing games...
+        </Text>
       </SafeAreaView>
     );
   }
@@ -210,10 +212,10 @@ const CreateGameForm = () => {
   if (currentStep === CreateGameStep.SETUP_BOUNDARY) {
     return (
       <SafeAreaView className="flex-1 p-5">
-        <Text className="text-2xl font-bold mb-2.5 text-center">
+        <Text className="text-2xl font-bold mb-2.5 text-center text-textPrimary">
           Step 1: Set Game Boundary
         </Text>
-        <Text className="text-center mb-4 text-gray-600">
+        <Text className="text-center mb-4 text-textSecondary">
           Tap on the map to create boundary points. You need at least 3 points
           to form a valid boundary.
         </Text>
