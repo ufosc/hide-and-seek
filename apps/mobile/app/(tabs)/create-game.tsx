@@ -211,99 +211,107 @@ const CreateGameForm = () => {
   // STEP 1: Boundary Setup Screen
   if (currentStep === CreateGameStep.SETUP_BOUNDARY) {
     return (
-      <SafeAreaView className="flex-1 p-5">
-        <Text className="text-2xl font-bold mb-2.5 text-center text-textPrimary">
-          Step 1: Set Game Boundary
-        </Text>
-        <Text className="text-center mb-4 text-textSecondary">
-          Tap on the map to create boundary points. You need at least 3 points
-          to form a valid boundary.
-        </Text>
-
-        <View
-          className="h-[50vh] rounded-lg overflow-hidden border border-gray-300 mb-4"
-          style={{ height: Dimensions.get("window").height * 0.5 }}
-        >
-          <MapComponent onPress={handleMapPress} />
-        </View>
-
-        <View className="items-center mb-4">
-          <Text className="text-base font-bold text-primary">
-            Points: {polygonDraftCoordinates.length}/3 minimum
+      <SafeAreaView className="flex-1 ">
+        <View className="p-3">
+          <Text className="text-2xl font-bold mb-2.5 text-center text-textPrimary">
+            Step 1: Set Game Boundary
           </Text>
-        </View>
+          <Text className="text-center mb-4 text-textSecondary">
+            Tap on the map to create boundary points. You need at least 3 points
+            to form a valid boundary.
+          </Text>
 
-        <View className="flex-row justify-between mb-4">
-          <Button onPress={() => clearPolygonDraft()} className="flex-1 mr-1">
-            Clear All Points
-          </Button>
-          <Button
-            onPress={() => removeLastCoordinateFromPolygonDraft()}
-            className="flex-1 ml-1"
+          <View
+            className="h-[50vh] rounded-lg overflow-hidden border border-border mb-4"
+            style={{ height: Dimensions.get("window").height * 0.5 }}
           >
-            Remove Last Point
+            <MapComponent onPress={handleMapPress} />
+          </View>
+
+          <View className="items-center mb-4">
+            <Text className="text-base font-bold text-primary">
+              Points: {polygonDraftCoordinates.length}/3 minimum
+            </Text>
+          </View>
+
+          <View className="flex-row justify-between mb-4">
+            <Button onPress={() => clearPolygonDraft()} className="flex-1 mr-1">
+              Clear All Points
+            </Button>
+            <Button
+              onPress={() => removeLastCoordinateFromPolygonDraft()}
+              className="flex-1 ml-1"
+            >
+              Remove Last Point
+            </Button>
+          </View>
+
+          <Button
+            disabled={polygonDraftCoordinates.length < 3}
+            onPress={nextStep}
+            className={`bg-success ${
+              polygonDraftCoordinates.length < 3 ? "opacity-40" : ""
+            }`}
+          >
+            Next: Add Game Details
           </Button>
         </View>
-
-        <Button
-          disabled={polygonDraftCoordinates.length < 3}
-          onPress={nextStep}
-          className={`bg-success ${
-            polygonDraftCoordinates.length < 3 ? "opacity-50" : ""
-          }`}
-        >
-          Next: Add Game Details
-        </Button>
       </SafeAreaView>
     );
   }
 
   // STEP 2: Game Details Screen
   return (
-    <SafeAreaView className="flex-1 p-5">
-      <Text className="text-2xl font-bold mb-2.5 text-center">
-        Step 2: Game Details
-      </Text>
-
-      <View className="bg-blue-100 p-2.5 rounded mb-4">
-        <Text className="text-primary font-medium">
-          ✓ Boundary set: {polygonDraftCoordinates.length} points
+    <SafeAreaView className="flex-1">
+      <View className="p-3">
+        <Text className="text-2xl font-bold mb-2.5 text-center text-textPrimary">
+          Step 2: Game Details
         </Text>
-      </View>
 
-      <TextInput
-        className="border border-gray-300 p-3 mb-4 rounded text-base"
-        placeholder="Game Title"
-        value={title}
-        onChangeText={setTitle}
-      />
+        <View className="bg-info p-2.5 rounded mb-4">
+          <Text className="text-textPrimary font-medium">
+            ✓ Boundary set: {polygonDraftCoordinates.length} points
+          </Text>
+        </View>
 
-      <TextInput
-        className="border border-gray-300 p-3 mb-4 rounded text-base h-[100px]"
-        placeholder="Game Description (optional)"
-        value={description}
-        onChangeText={setDescription}
-        multiline={true}
-        numberOfLines={4}
-        textAlignVertical="top"
-      />
+        <TextInput
+          className="border border-border p-3 mb-4 rounded text-base text-textPrimary bg-card"
+          placeholder="Game Title"
+          value={title}
+          onChangeText={setTitle}
+          placeholderTextColor={"#a7a9ac"}
+        />
 
-      <View className="flex-row justify-between mb-4">
-        <Button onPress={prevStep} className="flex-1 mr-1 bg-secondary">
-          Back to Boundary
-        </Button>
+        <TextInput
+          className="border border-border p-3 mb-4 rounded text-base h-[100px] text-textPrimary bg-card"
+          placeholder="Game Description (optional)"
+          value={description}
+          onChangeText={setDescription}
+          multiline={true}
+          numberOfLines={4}
+          textAlignVertical="top"
+          placeholderTextColor={"#a7a9ac"}
+        />
 
-        <Button
-          disabled={createGameMutation.isPending || !title || title.length < 3}
-          onPress={handleSubmit}
-          className={`flex-1 ml-1 bg-success ${
-            createGameMutation.isPending || !title || title.length < 3
-              ? "opacity-50"
-              : ""
-          }`}
-        >
-          {createGameMutation.isPending ? "Creating..." : "Create Game"}
-        </Button>
+        <View className="flex-row justify-between mb-4">
+          <Button onPress={prevStep} className="flex-1 mr-1 bg-secondary">
+            Back to Boundary
+          </Button>
+
+          <Button
+            disabled={
+              createGameMutation.isPending || !title || title.length < 3
+            }
+            onPress={handleSubmit}
+            className={`flex-1 ml-1 bg-success ${
+              createGameMutation.isPending || !title || title.length < 3
+                ? "opacity-50"
+                : ""
+            }`}
+          >
+            {createGameMutation.isPending ? "Creating..." : "Create Game"}
+          </Button>
+        </View>
       </View>
     </SafeAreaView>
   );
