@@ -1,9 +1,5 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-  Theme,
-} from "@react-navigation/native";
+import { DefaultTheme, ThemeProvider, Theme } from "@react-navigation/native";
+import { DarkTheme } from "@/styles/DarkTheme";
 
 import { TRPCProvider } from "@/lib/trpc";
 import {
@@ -66,16 +62,18 @@ export default function RootLayout() {
   }
 
   return (
-    <TRPCProvider>
-      <QueryClientProvider client={queryClient}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-          <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
-          <Stack.Screen name="+not-found" />
-        </Stack>
-        <StatusBar style="auto" />
-      </QueryClientProvider>
-    </TRPCProvider>
+    <ThemeProvider value={DarkTheme}>
+      <TRPCProvider>
+        <QueryClientProvider client={queryClient}>
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+            <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+          <StatusBar style="dark" />
+        </QueryClientProvider>
+      </TRPCProvider>
+    </ThemeProvider>
   );
 }

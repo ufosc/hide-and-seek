@@ -18,7 +18,7 @@ const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       {typeof children === "string" ? (
-        <Text className="text-white font-medium text-center text-sm">
+        <Text className="text-white font-normal text-center text-md">
           {children}
         </Text>
       ) : (

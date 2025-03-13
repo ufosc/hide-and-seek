@@ -33,6 +33,7 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
       onRegionChangeComplete={(newRegion: MapRegion) => setRegion(newRegion)}
       onMapReady={onMapReadyHandler}
       onPress={isDrawingPolygon && onPress ? onPress : undefined}
+      userInterfaceStyle="dark"
     >
       {/* Existing Markers, Polygons, Circles rendering... */}
       {markers.map((marker: MapMarker, index) => (
