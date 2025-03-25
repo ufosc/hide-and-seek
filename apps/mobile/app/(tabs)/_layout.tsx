@@ -39,6 +39,13 @@ export default function TabLayout() {
           headerShown: false,
         }}
       />
+      <Tabs.Screen
+        name="hider-actions"
+        options={{
+          title: "Actions",
+          headerShown: false,
+        }}
+      />
     </Tabs>
   );
 }
