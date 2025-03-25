@@ -5,13 +5,14 @@ import { useAuthStore } from "@/store/authStore";
 
 export default function SignUpPage() {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const { signUpWithEmail, isLoading } = useAuthStore();
 
   async function handleSignUp() {
     try {
-      await signUpWithEmail(email, password);
+      await signUpWithEmail(name, email, password);
       if (!isLoading) {
         router.replace("/(tabs)");
       }
@@ -19,7 +20,6 @@ export default function SignUpPage() {
       Alert.alert("Sign-up Error", error.message);
     }
   }
-
   return (
     <View className="flex-1 bg-gray-900 justify-between px-5 pb-10 pt-20">
       <View className="max-w-md w-full mx-auto space-y-4">
@@ -29,6 +29,13 @@ export default function SignUpPage() {
 
         <View>
           <View>
+            <TextInput
+              className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
+              placeholder="Name"
+              placeholderTextColor="#A3A3A3"
+              onChangeText={setName}
+              value={name}
+            />
             <TextInput
               className="w-full bg-gray-800 text-white p-4 rounded-lg mb-5"
               placeholder="Email"
