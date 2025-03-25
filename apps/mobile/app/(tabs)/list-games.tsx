@@ -312,6 +312,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 10,
     textAlign: "center",
+    color: "#fff",
   },
   errorText: {
     color: "red",

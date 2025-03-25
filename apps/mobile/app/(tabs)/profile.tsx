@@ -8,8 +8,8 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView>
-      <Text>Profile Screen</Text>
-      {user && <Text>User ID: {user.id}</Text>}
+      <Text className=" text-textPrimary">Profile Screen</Text>
+      {user && <Text className="text-textSecondary">User ID: {user.id}</Text>}
       <View>
         <Button onPress={signOut}>Sign Out</Button>
       </View>
