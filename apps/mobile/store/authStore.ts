@@ -11,8 +11,16 @@ interface AuthState {
   isLoading: boolean;
   setUser: (session: Session | null) => void;
   signOut: () => Promise<void>;
-  signInWithEmail: (email: string, password: string) => Promise<void>;
-  signUpWithEmail: (email: string, password: string) => Promise<void>;
+  signInWithEmail: (
+    name: string,
+    email: string,
+    password: string
+  ) => Promise<void>;
+  signUpWithEmail: (
+    name: string,
+    email: string,
+    password: string
+  ) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -44,7 +52,11 @@ export const useAuthStore = create<AuthState>()(
         }
         set({ isLoading: false });
       },
-      signUpWithEmail: async (email: string, password: string) => {
+      signUpWithEmail: async (
+        name: string,
+        email: string,
+        password: string
+      ) => {
         set({ isLoading: true });
         try {
           // Step 1: Register with Supabase Auth
@@ -63,7 +75,7 @@ export const useAuthStore = create<AuthState>()(
             // Step 2: Create user in database using tRPC
             try {
               trpcClient.user.create.mutate({
-                name: "Place D. Holder", // Can you tell I've been reading one piece lol
+                name,
                 email: email,
                 auth_id: data.user.id,
               });
