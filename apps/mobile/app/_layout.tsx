@@ -19,6 +19,7 @@ import { StatusBar } from "expo-status-bar";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -65,12 +66,14 @@ export default function RootLayout() {
     <ThemeProvider value={DarkTheme}>
       <TRPCProvider>
         <QueryClientProvider client={queryClient}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
+          <GestureHandlerRootView>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </GestureHandlerRootView>
           <StatusBar style="dark" />
         </QueryClientProvider>
       </TRPCProvider>
