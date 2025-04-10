@@ -8,6 +8,8 @@
     "@repo/schema": "*",
     "@repo/shared-types": "*",
     "@trpc/server": "^11.0.0-next-beta.113",
+    "react-native-svg": "^15.11.2",
+    "react-native-svg-transformer": "^1.5.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
-import { Tabs } from "expo-router";
+import { Tabs, Redirect } from "expo-router";
 import { useAuthStore } from "@/store/authStore";
-import { Redirect } from "expo-router";
+import { Image } from "react-native";
 
 export default function TabLayout() {
   const session = useAuthStore((state) => state.session);
@@ -10,33 +10,55 @@ export default function TabLayout() {
   }
 
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconSource;
+
+          if (route.name === "index") {
+            iconSource = require("@/assets/images/homeIcon.png");
+            } else if (route.name === "create-game") {
+            iconSource = require("@/assets/images/createIcon.png");
+            } else if (route.name === "list-games") {
+            iconSource = require("@/assets/images/listIcon.png");
+            } else if (route.name === "profile") {
+            iconSource = require("@/assets/images/profileIcon.png");
+            }
+
+          return (
+            <Image
+              source={iconSource}
+              style={{ width: size, height: size, tintColor: color }}
+            />
+          );
+        },
+        tabBarActiveTintColor: "blue",
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
+      })}
+    >
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
-          headerShown: false,
         }}
       />
       <Tabs.Screen
         name="create-game"
         options={{
           title: "Create",
-          headerShown: false,
         }}
       />
       <Tabs.Screen
         name="list-games"
         options={{
           title: "List",
-          headerShown: false,
         }}
       />
       <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
-          headerShown: false,
         }}
       />
     </Tabs>
