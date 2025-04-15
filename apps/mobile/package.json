@@ -30,6 +30,7 @@
     "expo-blur": "^14.0.3",
     "expo-constants": "~17.0.5",
     "expo-linking": "~7.0.5",
+    "expo-location": "^18.0.10",
     "expo-router": "~4.0.17",
     "expo-splash-screen": "^0.29.21",
     "expo-status-bar": "~2.0.1",

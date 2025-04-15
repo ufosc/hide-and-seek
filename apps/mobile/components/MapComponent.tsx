@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import MapView, { Marker, Polygon, Circle } from "react-native-maps";
+import MapView, { Marker, Polygon, Circle, PROVIDER_GOOGLE } from "react-native-maps";
 import useMapStore from "../store/mapStore";
 import {
   MapMarker,
@@ -7,14 +7,16 @@ import {
   MapCircle,
   MapRegion,
 } from "@repo/shared-types/maps";
+import { useLocation } from "@/hooks/useLocation";
 
 import { LatLng } from "react-native-maps";
 
 interface MapComponentProps {
   onPress?: (event: any) => void;
+  showsUserLocation?: boolean;
 }
 
-const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
+const MapComponent: React.FC<MapComponentProps> = ({ onPress, showsUserLocation = true }) => {
   const region = useMapStore((state) => state.region);
   const setRegion = useMapStore((state) => state.setRegion);
   const markers = useMapStore((state) => state.markers);
@@ -25,33 +27,47 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
   const polygonDraftCoordinates = useMapStore(
     (state) => state.polygonDraftCoordinates
   );
+  const userLocation = useMapStore((state) => state.userLocation);
 
-  //THIS IS NEEDED DUE TO REACT NATIVE MAPS NOT SUPPORTING FABRIC (New Architecture used in Expo 52)
+  // Initialize location tracking
+  useLocation();
+
+  // THIS IS NEEDED DUE TO REACT NATIVE MAPS NOT SUPPORTING FABRIC (New Architecture used in Expo 52)
   // REMOVE mapKey WHEN MOVING TO DEV BUILDS
-
-  // Use useMemo to generate a key that changes only when user actions happen
-  // Explicitly exclude region from dependencies to prevent re-renders during scrolling/panning
   const mapKey = useMemo(() => {
-    // Return a timestamp that will be unique for each re-render
     return Date.now().toString();
   }, [
-    // Do NOT include region here - we don't want to re-render on map scrolling
     markers,
     polygons,
     circles,
     isDrawingPolygon,
     polygonDraftCoordinates,
+    userLocation,
   ]);
+
+  // Center map on user location when it's available for the first time
+  React.useEffect(() => {
+    if (userLocation && userLocation.latitude && userLocation.longitude) {
+      setRegion({
+        ...region,
+        latitude: userLocation.latitude,
+        longitude: userLocation.longitude,
+      });
+    }
+  }, [userLocation?.latitude, userLocation?.longitude]);
 
   return (
     <MapView
-      key={mapKey} // This forces a complete re-render when the key changes
+      key={mapKey}
       style={{ flex: 1 }}
       region={region}
       onRegionChangeComplete={(newRegion: MapRegion) => setRegion(newRegion)}
       onMapReady={onMapReadyHandler}
       onPress={isDrawingPolygon && onPress ? onPress : undefined}
       userInterfaceStyle="dark"
+      showsUserLocation={showsUserLocation}
+      showsMyLocationButton={true}
+      followsUserLocation={true}
     >
       {/* Existing Markers, Polygons, Circles rendering... */}
       {markers.map((marker: MapMarker, index) => (
