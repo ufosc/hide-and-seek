@@ -210,6 +210,8 @@ const CreateGameForm = () => {
 
   // STEP 1: Boundary Setup Screen
   if (currentStep === CreateGameStep.SETUP_BOUNDARY) {
+    const textColor = polygonDraftCoordinates.length < 3 ? "red" : "blue";
+
     return (
       <SafeAreaView className="flex-1 ">
         <View className="p-3">
@@ -229,7 +231,10 @@ const CreateGameForm = () => {
           </View>
 
           <View className="items-center mb-4">
-            <Text className="text-base font-bold text-primary">
+            <Text
+              style={{ color: textColor }}
+              className={`text-base font-bold`}
+            >
               Points: {polygonDraftCoordinates.length}/3 minimum
             </Text>
           </View>
