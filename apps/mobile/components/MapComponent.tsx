@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import MapView, { Marker, Polygon, Circle } from "react-native-maps";
 import useMapStore from "../store/mapStore";
 import {
@@ -26,13 +26,32 @@ const MapComponent: React.FC<MapComponentProps> = ({ onPress }) => {
     (state) => state.polygonDraftCoordinates
   );
 
+  //THIS IS NEEDED DUE TO REACT NATIVE MAPS NOT SUPPORTING FABRIC (New Architecture used in Expo 52)
+  // REMOVE mapKey WHEN MOVING TO DEV BUILDS
+
+  // Use useMemo to generate a key that changes only when user actions happen
+  // Explicitly exclude region from dependencies to prevent re-renders during scrolling/panning
+  const mapKey = useMemo(() => {
+    // Return a timestamp that will be unique for each re-render
+    return Date.now().toString();
+  }, [
+    // Do NOT include region here - we don't want to re-render on map scrolling
+    markers,
+    polygons,
+    circles,
+    isDrawingPolygon,
+    polygonDraftCoordinates,
+  ]);
+
   return (
     <MapView
+      key={mapKey} // This forces a complete re-render when the key changes
       style={{ flex: 1 }}
       region={region}
       onRegionChangeComplete={(newRegion: MapRegion) => setRegion(newRegion)}
       onMapReady={onMapReadyHandler}
       onPress={isDrawingPolygon && onPress ? onPress : undefined}
+      userInterfaceStyle="dark"
     >
       {/* Existing Markers, Polygons, Circles rendering... */}
       {markers.map((marker: MapMarker, index) => (
