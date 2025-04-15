@@ -17,13 +17,15 @@ export default function TabLayout() {
 
           if (route.name === "index") {
             iconSource = require("@/assets/images/homeIcon.png");
-            } else if (route.name === "create-game") {
+          } else if (route.name === "create-game") {
             iconSource = require("@/assets/images/createIcon.png");
-            } else if (route.name === "list-games") {
+          } else if (route.name === "list-games") {
             iconSource = require("@/assets/images/listIcon.png");
-            } else if (route.name === "profile") {
+          } else if (route.name === "profile") {
             iconSource = require("@/assets/images/profileIcon.png");
-            }
+          } else if (route.name === "hider-actions") {
+            iconSource = require("@/assets/images/actionsIcon.png");
+          }
 
           return (
             <Image
@@ -56,16 +58,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profile",
-        }}
-      />
-      <Tabs.Screen
         name="hider-actions"
         options={{
           title: "Actions",
-          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
         }}
       />
     </Tabs>
