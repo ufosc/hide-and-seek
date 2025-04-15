@@ -27,18 +27,29 @@ const Dice = () => {
     // Simulate rolling animation with multiple values
     let rollCount = 0;
     const maxRolls = 10;
-    const rollInterval = setInterval(() => {
+    rollIntervalRef.current = setInterval(() => {
       const tempResult = Math.floor(Math.random() * sides) + 1;
       setDiceResult(tempResult);
 
       rollCount++;
       if (rollCount >= maxRolls) {
-        clearInterval(rollInterval);
+        if (rollIntervalRef.current) {
+          clearInterval(rollIntervalRef.current);
+          rollIntervalRef.current = null;
+        }
         setIsRolling(false);
       }
     }, 100);
   };
 
+  // Cleanup interval on component unmount
+  useEffect(() => {
+    return () => {
+      if (rollIntervalRef.current) {
+        clearInterval(rollIntervalRef.current);
+      }
+    };
+  }, []);
   // Reset result when popup closes
   useEffect(() => {
     if (!showPopup) {
