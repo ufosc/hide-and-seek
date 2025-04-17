@@ -14,11 +14,14 @@ const queryClient = new QueryClient();
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { supabase } from "@/lib/supabase";
 import { useAuthStore } from "@/store/authStore";
 import React from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View } from "react-native";
+import Dice from "@/components/Dice";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -65,12 +68,17 @@ export default function RootLayout() {
     <ThemeProvider value={DarkTheme}>
       <TRPCProvider>
         <QueryClientProvider client={queryClient}>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
+          <GestureHandlerRootView>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+              <Stack.Screen name="game-lobby" options={{ headerShown: true }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </GestureHandlerRootView>
+
+          <Dice />
+
           <StatusBar style="dark" />
         </QueryClientProvider>
       </TRPCProvider>
