@@ -64,6 +64,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="seeker-actions"
+        options={{
+          title: "Seeker",
+        }}
+      />
+      <Tabs.Screen
         name="profile"
         options={{
           title: "Profile",
